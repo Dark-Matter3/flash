@@ -46,16 +46,16 @@
 
 .flash-demo__subtitle {
   color: var(--demo-text-muted);
-  font-size: 1rem;
+  font-size: clamp(15px, 0.4vw + 13px, 17px);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .flash-demo__beta-notice {
   display: inline-block;
   margin-top: 0.75rem;
   padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  font-size: clamp(14px, 0.3vw + 13px, 15px);
   color: var(--demo-primary-dark);
   background: rgba(98, 0, 238, 0.08);
   border-radius: 999px;
@@ -94,14 +94,15 @@
 }
 
 .flash-demo__stat-label {
-  font-size: 0.75rem;
+  font-size: clamp(13px, 0.4vw + 11px, 14px);
+  font-weight: 600;
   color: var(--demo-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 .flash-demo__stat-value {
-  font-size: 1.5rem;
+  font-size: clamp(18px, 0.5vw + 16px, 22px);
   font-weight: 700;
   color: var(--demo-text);
 }
@@ -192,11 +193,11 @@
 
 .flash-demo__type {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: clamp(13px, 0.3vw + 12px, 14px);
   font-weight: 600;
   color: var(--demo-primary);
   background: rgba(98, 0, 238, 0.1);
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.85rem;
   border-radius: 999px;
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -385,7 +386,7 @@
    ========================================== */
 .flash-demo__tip {
   text-align: center;
-  font-size: 0.875rem;
+  font-size: clamp(14px, 0.3vw + 13px, 15px);
   color: var(--demo-text-muted);
   margin: 0 0 1.5rem;
 }
