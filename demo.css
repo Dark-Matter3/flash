@@ -1,405 +1,514 @@
 /**
- * Flash Mini Demo Styles
- * ======================
- * Scoped styles for the playable demo widget embedded in the landing page.
- * All styles are namespaced under .flash-demo to avoid conflicts.
- *
- * Design tokens matched to main landing page:
- * - Primary: #6200EE (purple)
- * - Success: #03DAC6 (teal)
- * - Error: #CF6679 (muted red)
+ * Flash Mini Demo - Swipe Card Styles
+ * ====================================
+ * 
+ * Styles for the binary swipe-based vocabulary demo.
+ * Mobile-first, system fonts, no external dependencies.
  */
 
-/* Demo Section Container */
+/* ==========================================
+   CONTAINER & HEADER
+   ========================================== */
 .flash-demo {
-    padding: 4.8rem 0;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: #ffffff;
+  --demo-primary: #6200EE;
+  --demo-primary-dark: #3700B3;
+  --demo-secondary: #03DAC6;
+  --demo-success: #00C853;
+  --demo-error: #FF5252;
+  --demo-bg: #fafafa;
+  --demo-card-bg: #ffffff;
+  --demo-text: #212121;
+  --demo-text-muted: #757575;
+  --demo-border: #e0e0e0;
+  --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --demo-radius: 16px;
+  
+  background: var(--demo-bg);
+  padding: 3rem 1rem;
 }
 
 .flash-demo .container {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 2.4rem;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-/* Section Header */
 .flash-demo__header {
-    text-align: center;
-    margin-bottom: 3.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .flash-demo__title {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.8rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--demo-primary);
+  margin: 0 0 0.5rem;
 }
 
 .flash-demo__subtitle {
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0;
+  color: var(--demo-text-muted);
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.4;
 }
 
-.flash-demo__badge {
-    display: inline-block;
-    background: rgba(98, 0, 238, 0.3);
-    color: #BB86FC;
-    padding: 0.4rem 1.2rem;
-    border-radius: 20px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-top: 1rem;
-}
-
-/* Meta Stats Row */
-.flash-demo__meta {
-    display: flex;
-    justify-content: center;
-    gap: 2.4rem;
-    margin-bottom: 1.6rem;
-    flex-wrap: wrap;
+/* ==========================================
+   STATS BAR
+   ========================================== */
+.flash-demo__stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--demo-card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .flash-demo__stat {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.flash-demo__stat-icon {
-    font-size: 1.6rem;
+.flash-demo__stat-label {
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .flash-demo__stat-value {
-    font-weight: 700;
-    color: #BB86FC;
-    min-width: 2.4rem;
-    text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--demo-text);
 }
 
-/* Question Card */
+.flash-demo__stat--streak .flash-demo__stat-value {
+  color: var(--demo-primary);
+}
+
+/* Hot streak animation */
+.flash-demo__stat--hot {
+  animation: pulse-streak 0.6s ease-in-out infinite alternate;
+}
+
+.flash-demo__stat--hot .flash-demo__stat-value {
+  color: #FF6B00;
+}
+
+@keyframes pulse-streak {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* ==========================================
+   PROGRESS BAR
+   ========================================== */
+.flash-demo__progress-bar {
+  height: 6px;
+  background: var(--demo-border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.flash-demo__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--demo-primary), var(--demo-secondary));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+/* ==========================================
+   CARD AREA
+   ========================================== */
+.flash-demo__card-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  margin-bottom: 1.5rem;
+  perspective: 1000px;
+}
+
+/* ==========================================
+   SWIPE CARD
+   ========================================== */
 .flash-demo__card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 2.4rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    color: #121212;
-    margin-bottom: 1.6rem;
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  min-height: 180px;
+  background: var(--demo-card-bg);
+  border-radius: var(--demo-radius);
+  box-shadow: var(--demo-shadow);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  will-change: transform;
+  transition: box-shadow 0.2s ease;
 }
 
-.flash-demo__card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #6200EE, #BB86FC);
+.flash-demo__card:active,
+.flash-demo__card--dragging {
+  cursor: grabbing;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Question Type Label */
 .flash-demo__type {
-    display: inline-block;
-    background: #F5F5F5;
-    color: #6200EE;
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.6rem;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--demo-primary);
+  background: rgba(98, 0, 238, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Question Prompt */
 .flash-demo__prompt {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #121212;
-    margin-bottom: 2rem;
-    line-height: 1.4;
-    min-height: 5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--demo-text);
+  margin: 0;
+  line-height: 1.4;
 }
 
-/* Answer Options */
-.flash-demo__options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    margin-bottom: 1.6rem;
+/* Card enter animation */
+.flash-demo__card--enter {
+  animation: card-enter 0.3s ease-out;
 }
 
-.flash-demo__option {
-    background: #F5F5F5;
-    border: 2px solid #E0E0E0;
-    border-radius: 8px;
-    padding: 1.4rem 1.6rem;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #121212;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: center;
-    font-family: inherit;
-    position: relative;
-}
-
-.flash-demo__option:hover:not(:disabled) {
-    background: #E8E0F0;
-    border-color: #6200EE;
-    transform: translateY(-2px);
-}
-
-.flash-demo__option:focus {
-    outline: 3px solid #BB86FC;
-    outline-offset: 2px;
-}
-
-.flash-demo__option:disabled {
-    cursor: not-allowed;
-    opacity: 0.8;
-}
-
-/* Keyboard shortcut hint */
-.flash-demo__option::before {
-    content: attr(data-key);
-    position: absolute;
-    top: 0.4rem;
-    left: 0.6rem;
-    font-size: 1rem;
-    color: #9E9E9E;
-    font-weight: 600;
-}
-
-/* Correct/Wrong States */
-.flash-demo__option--correct {
-    background: #E8F5E9 !important;
-    border-color: #03DAC6 !important;
-    color: #00796B !important;
-}
-
-.flash-demo__option--correct::after {
-    content: '✓';
-    position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
-    color: #00796B;
-    font-weight: 700;
-}
-
-.flash-demo__option--wrong {
-    background: #FFEBEE !important;
-    border-color: #CF6679 !important;
-    color: #B00020 !important;
-}
-
-.flash-demo__option--wrong::after {
-    content: '✗';
-    position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
-    color: #B00020;
-    font-weight: 700;
-}
-
-/* Feedback Area */
-.flash-demo__feedback {
-    min-height: 4.8rem;
-    padding: 1.2rem;
-    border-radius: 8px;
-    font-size: 1.4rem;
-    text-align: center;
+@keyframes card-enter {
+  from {
+    transform: scale(0.9) translateY(20px);
     opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.flash-demo__feedback--visible {
+  }
+  to {
+    transform: scale(1) translateY(0);
     opacity: 1;
+  }
 }
 
-.flash-demo__feedback--correct {
-    background: rgba(3, 218, 198, 0.15);
-    color: #00796B;
-    border: 1px solid rgba(3, 218, 198, 0.3);
+/* ==========================================
+   CARD FEEDBACK OVERLAY
+   ========================================== */
+.flash-demo__card-feedback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--demo-radius);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.flash-demo__feedback--wrong {
-    background: rgba(207, 102, 121, 0.15);
-    color: #CF6679;
-    border: 1px solid rgba(207, 102, 121, 0.3);
+.flash-demo__card-feedback--visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Controls Row */
-.flash-demo__controls {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    flex-wrap: wrap;
+.flash-demo__card-feedback-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
 
-.flash-demo__btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 1rem 2rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
+.flash-demo__card-feedback-text {
+  font-size: 1rem;
+  color: var(--demo-text);
+  padding: 0 1rem;
+  text-align: center;
+  line-height: 1.4;
 }
 
-.flash-demo__btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.2);
+.flash-demo__card-feedback--correct {
+  border: 3px solid var(--demo-success);
 }
 
-.flash-demo__btn:focus {
-    outline: 3px solid #BB86FC;
-    outline-offset: 2px;
+.flash-demo__card-feedback--wrong {
+  border: 3px solid var(--demo-error);
 }
 
-.flash-demo__btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+/* ==========================================
+   SWIPE HINTS
+   ========================================== */
+.flash-demo__swipe-hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--demo-border);
+  color: var(--demo-text-muted);
+  font-size: 1.25rem;
+  font-weight: 700;
+  opacity: 0.4;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  pointer-events: none;
 }
 
-.flash-demo__btn--primary {
-    background: #6200EE;
-    border-color: #6200EE;
+.flash-demo__swipe-hint--left {
+  left: -60px;
 }
 
-.flash-demo__btn--primary:hover:not(:disabled) {
-    background: #7C4DFF;
+.flash-demo__swipe-hint--right {
+  right: -60px;
 }
 
-/* Keyboard Tip */
+.flash-demo__swipe-hint--active {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+  background: var(--demo-primary);
+  color: #fff;
+}
+
+/* Hide hints on smaller screens where they overlap */
+@media (max-width: 480px) {
+  .flash-demo__swipe-hint {
+    display: none;
+  }
+}
+
+/* ==========================================
+   CHOICE BUTTONS
+   ========================================== */
+.flash-demo__choices {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.flash-demo__choice {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 2px solid var(--demo-border);
+  border-radius: 12px;
+  background: var(--demo-card-bg);
+  color: var(--demo-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 60px;
+}
+
+.flash-demo__choice:hover:not(:disabled) {
+  border-color: var(--demo-primary);
+  background: rgba(98, 0, 238, 0.05);
+}
+
+.flash-demo__choice:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.flash-demo__choice:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.flash-demo__choice-arrow {
+  font-size: 1.25rem;
+  opacity: 0.6;
+}
+
+.flash-demo__choice-text {
+  flex: 1;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/* Correct/Wrong states */
+.flash-demo__choice--correct {
+  border-color: var(--demo-success) !important;
+  background: rgba(0, 200, 83, 0.1) !important;
+  color: var(--demo-success) !important;
+}
+
+.flash-demo__choice--wrong {
+  border-color: var(--demo-error) !important;
+  background: rgba(255, 82, 82, 0.1) !important;
+  color: var(--demo-error) !important;
+}
+
+/* ==========================================
+   TIP TEXT
+   ========================================== */
 .flash-demo__tip {
-    text-align: center;
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  margin: 0 0 1.5rem;
 }
 
 .flash-demo__tip kbd {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    padding: 0.2rem 0.6rem;
-    font-family: inherit;
-    font-size: 1.1rem;
-    margin: 0 0.2rem;
+  display: inline-block;
+  padding: 0.2em 0.4em;
+  font-size: 0.8em;
+  font-family: inherit;
+  background: var(--demo-card-bg);
+  border: 1px solid var(--demo-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* End Screen */
+/* ==========================================
+   CONTROLS
+   ========================================== */
+.flash-demo__controls {
+  display: flex;
+  justify-content: center;
+}
+
+.flash-demo__btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  background: var(--demo-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.flash-demo__btn:hover {
+  background: var(--demo-primary-dark);
+}
+
+.flash-demo__btn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================
+   COMPLETE SCREEN
+   ========================================== */
+.flash-demo__card--complete {
+  cursor: default;
+}
+
 .flash-demo__complete {
-    text-align: center;
-    padding: 2rem;
+  text-align: center;
+  padding: 1rem 0;
 }
 
-.flash-demo__complete-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+.flash-demo__complete-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .flash-demo__complete-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 1rem;
 }
 
-.flash-demo__complete-score {
-    font-size: 1.6rem;
-    color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 2rem;
+.flash-demo__complete-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
 }
 
-.flash-demo__complete-score strong {
-    color: #6200EE;
-    font-size: 2rem;
+.flash-demo__complete-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Accessibility: Screen reader only */
+.flash-demo__complete-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--demo-primary);
+}
+
+.flash-demo__complete-stat-label {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+}
+
+.flash-demo__complete-cta {
+  color: var(--demo-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
 .flash-demo__sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Progress Bar */
-.flash-demo__progress {
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 1.6rem;
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 400px) {
+  .flash-demo {
+    padding: 2rem 0.75rem;
+  }
+  
+  .flash-demo__title {
+    font-size: 1.5rem;
+  }
+  
+  .flash-demo__prompt {
+    font-size: 1.25rem;
+  }
+  
+  .flash-demo__choice {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+    min-height: 50px;
+  }
+  
+  .flash-demo__choice-arrow {
+    font-size: 1rem;
+  }
 }
 
-.flash-demo__progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #6200EE, #BB86FC);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .flash-demo__title {
-        font-size: 2rem;
-    }
-
-    .flash-demo__options {
-        grid-template-columns: 1fr;
-    }
-
-    .flash-demo__prompt {
-        font-size: 1.6rem;
-    }
-
-    .flash-demo__meta {
-        gap: 1.6rem;
-    }
-
-    .flash-demo__card {
-        padding: 1.6rem;
-    }
-
-    .flash-demo__controls {
-        flex-direction: column;
-    }
-
-    .flash-demo__btn {
-        width: 100%;
-    }
-}
-
-/* Animation for card entrance */
-@keyframes flash-demo-fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.flash-demo__card--animate {
-    animation: flash-demo-fadeIn 0.3s ease forwards;
+/* Focus styles for keyboard users */
+.flash-demo__choice:focus-visible,
+.flash-demo__btn:focus-visible {
+  outline: 3px solid var(--demo-secondary);
+  outline-offset: 2px;
 }
