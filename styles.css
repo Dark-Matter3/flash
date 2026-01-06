@@ -243,6 +243,87 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ========================
+   ABOUT SECTION
+   ======================== */
+.about {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, rgba(98, 0, 238, 0.03) 0%, rgba(3, 218, 198, 0.03) 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.about-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about h2 {
+    font-size: 2.4rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary);
+}
+
+.about-summary {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.about-highlights,
+.about-background {
+    margin-bottom: var(--spacing-lg);
+}
+
+.about-highlights h4,
+.about-background h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.about-highlights ul,
+.about-background ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-highlights li,
+.about-background li {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    padding: 0.4rem 0;
+    line-height: 1.5;
+}
+
+.about-highlights li strong {
+    color: var(--text-primary);
+}
+
+.about-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border);
+}
+
+.about-link {
+    font-size: 1.4rem;
+    color: var(--primary);
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.about-link:hover {
+    color: var(--primary-dark);
+}
+
+/* ========================
    FEATURES SECTION
    ======================== */
 .features {
