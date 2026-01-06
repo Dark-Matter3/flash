@@ -1,0 +1,500 @@
+/**
+ * Flash Landing Page - Main Styles
+ * =================================
+ * No external dependencies - uses system font stack
+ * All paths are relative for GitHub Pages compatibility
+ */
+
+:root {
+    /* Color palette - Flash brand colors */
+    --primary: #6200EE;
+    --primary-dark: #3700B3;
+    --primary-light: #BB86FC;
+    --secondary: #03DAC6;
+    --background: #FFFFFF;
+    --surface: #F5F5F5;
+    --text-primary: #121212;
+    --text-secondary: #757575;
+    --text-tertiary: #9E9E9E;
+
+    /* Spacing */
+    --spacing-xs: 0.4rem;
+    --spacing-sm: 0.8rem;
+    --spacing-md: 1.6rem;
+    --spacing-lg: 2.4rem;
+    --spacing-xl: 3.2rem;
+    --spacing-xxl: 4.8rem;
+
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--background);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+}
+
+h1 { font-size: 3.6rem; }
+h2 { font-size: 2.8rem; text-align: center; margin-bottom: var(--spacing-xl); }
+h3 { font-size: 2rem; }
+
+p { margin-bottom: var(--spacing-md); }
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover { color: var(--primary-dark); }
+
+ul { list-style: none; }
+
+img { max-width: 100%; height: auto; }
+
+/* ========================
+   NAVBAR
+   ======================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7rem;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.navbar .logo-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.navbar nav ul {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.navbar nav ul li a {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+}
+
+.navbar nav ul li a:hover {
+    background-color: var(--surface);
+    color: var(--primary);
+}
+
+/* ========================
+   BUTTONS
+   ======================== */
+.btn {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+    padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.cta-button {
+    background-color: var(--primary);
+    color: #fff !important;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+}
+
+.cta-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ========================
+   HERO SECTION
+   ======================== */
+.hero {
+    padding: 14rem 0 var(--spacing-xxl);
+    background: linear-gradient(135deg, var(--surface) 0%, #fff 100%);
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxl);
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content h1 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.hero-tagline {
+    font-size: 1.8rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-mascot {
+    width: 280px;
+    height: 280px;
+    filter: drop-shadow(0 10px 30px rgba(98, 0, 238, 0.2));
+}
+
+/* ========================
+   FEATURES SECTION
+   ======================== */
+.features {
+    padding: var(--spacing-xxl) 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.feature-card {
+    background-color: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.feature-card h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* ========================
+   DOWNLOAD SECTION
+   ======================== */
+.download {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--surface);
+    text-align: center;
+}
+
+.download p {
+    max-width: 60rem;
+    margin: 0 auto var(--spacing-xl);
+    font-size: 1.8rem;
+    color: var(--text-secondary);
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.store-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background-color: var(--text-primary);
+    color: #fff;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+}
+
+.store-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.store-icon {
+    font-size: 2.4rem;
+}
+
+.store-text {
+    text-align: left;
+    line-height: 1.2;
+}
+
+.store-text small {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.store-text strong {
+    font-size: 1.6rem;
+    display: block;
+}
+
+/* ========================
+   CONTACT SECTION
+   ======================== */
+.contact {
+    padding: var(--spacing-xxl) 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.contact-card {
+    background-color: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+.contact-card h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-card p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ========================
+   FOOTER
+   ======================== */
+footer {
+    background-color: var(--text-primary);
+    color: #fff;
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.footer-brand img {
+    filter: invert(1);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.footer-links a {
+    color: var(--text-tertiary);
+    font-size: 1.4rem;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-tertiary);
+}
+
+.build-stamp {
+    margin-top: var(--spacing-sm);
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 900px) {
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-cta {
+        justify-content: center;
+    }
+
+    .hero-mascot {
+        width: 200px;
+        height: 200px;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        height: auto;
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 55%;
+    }
+
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.4rem; }
+
+    .hero {
+        padding-top: 12rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+    }
+
+    .store-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .store-btn {
+        width: 100%;
+        max-width: 28rem;
+        justify-content: center;
+    }
+
+    .navbar nav ul {
+        gap: var(--spacing-sm);
+    }
+}

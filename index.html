@@ -1,83 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flash – Vocabulary Reinvented</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fefefe;
-      color: #333;
-      text-align: center;
-      padding: 2rem;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-    }
-    img.logo {
-      width: 120px;
-      margin-bottom: 1rem;
-    }
-    h1 {
-      font-size: 2rem;
-      color: #ff6f00;
-    }
-    .subtitle {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 2rem;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      background-color: #ff6f00;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-    iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-      border-radius: 12px;
-      margin-top: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - Master Vocabulary Faster</title>
+    <meta name="description" content="Flash is a gamified vocabulary learning app that helps you master new words through interactive, swipe-based gameplay.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="demo.css">
+    <!-- Using system fonts - no external dependencies -->
 </head>
 <body>
-  <div class="container">
-    <img src="fp20Ux01.svg" alt="Flash Mascot" class="logo" />
-    <h1>Flash</h1>
-    <p class="subtitle">A gamified vocabulary learning app designed with cognitive clarity — especially helpful for neurodivergent learners.</p>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/mascot.svg" alt="Flash Logo" width="50" height="50">
+                <span class="logo-text">Flash</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#demo">Try Demo</a></li>
+                    <li><a href="#download" class="cta-button">Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <div class="section">
-      <h2>🎮 Demo Preview</h2>
-      <p>(Video opens in Google Drive)</p>
-      <a href="https://drive.google.com/file/d/1Jp57IAEaqOoOxCeReV4DPmA9pXCxNR3X/view?usp=sharing" target="_blank" class="button">Watch 45s Gameplay Demo</a>
-    </div>
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Master Vocabulary with Flash</h1>
+                <p class="hero-tagline">The swipe-based learning app that makes expanding your vocabulary fun, competitive, and effective.</p>
+                <div class="hero-cta">
+                    <a href="#demo" class="btn btn-primary">Try the Demo</a>
+                    <a href="#download" class="btn btn-secondary">Download App</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="assets/mascot.svg" alt="Flash Mascot" class="hero-mascot">
+            </div>
+        </div>
+    </section>
 
-    <div class="section">
-      <h2>📁 Application Materials</h2>
-      <a href="https://drive.google.com/drive/folders/18bPShn_V40N01fE7aIpvRidukCAlHxjC?usp=sharing" target="_blank" class="button">View Portfolio Folder</a>
-    </div>
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Features That Make Learning Stick</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👆</div>
+                    <h3>Swipe-Based Learning</h3>
+                    <p>Learn new words with intuitive swipe gestures that make vocabulary practice feel like a game.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Competitive Mode</h3>
+                    <p>Challenge friends or compete globally on leaderboards to stay motivated on your language journey.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Smart Progress Tracking</h3>
+                    <p>Adaptive learning algorithms focus on the words you need the most help with.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="section">
-      <h2>🧠 Built by</h2>
-      <p><strong>Eray Korkmaz</strong><br>Solo founder & developer</p>
-    </div>
+    <!-- Flash Mini Demo Widget -->
+    <section class="flash-demo" id="flash-demo" aria-labelledby="demo-title">
+        <!-- Content dynamically generated by demo.js -->
+        <noscript>
+            <div class="container" style="text-align: center; padding: 3rem;">
+                <p style="color: #fff;">JavaScript is required to play the Flash Mini Demo.</p>
+            </div>
+        </noscript>
+    </section>
 
-    <div class="section">
-      <h2>📬 Contact</h2>
-      <p>Email: <a href="mailto:cortexdigitaltech@gmail.com">cortexdigitaltech@gmail.com</a></p>
-    </div>
-  </div>
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Ready to Expand Your Vocabulary?</h2>
+            <p>Download Flash today and join thousands of learners improving their vocabulary skills.</p>
+            <div class="store-buttons">
+                <a href="#" class="store-btn" aria-label="Download on App Store">
+                    <span class="store-icon">🍎</span>
+                    <span class="store-text">
+                        <small>Download on the</small>
+                        <strong>App Store</strong>
+                    </span>
+                </a>
+                <a href="#" class="store-btn" aria-label="Get it on Google Play">
+                    <span class="store-icon">▶️</span>
+                    <span class="store-text">
+                        <small>Get it on</small>
+                        <strong>Google Play</strong>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>📬 Contact</h3>
+                    <p>Questions or feedback?</p>
+                    <a href="mailto:eraykorkmaz09@gmail.com" class="btn btn-outline">Email Us</a>
+                </div>
+                <div class="contact-card">
+                    <h3>💼 Invest</h3>
+                    <p>Interested in opportunities?</p>
+                    <a href="mailto:eraykorkmaz09@gmail.com" class="btn btn-outline">Contact for Investment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/mascot.svg" alt="Flash" width="40" height="40">
+                    <span>Flash</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#download">Download</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Flash App. All rights reserved.</p>
+                <p class="build-stamp">Build: 2026-01-06 | landing-dist</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="demo.js"></script>
 </body>
 </html>

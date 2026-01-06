@@ -1,0 +1,405 @@
+/**
+ * Flash Mini Demo Styles
+ * ======================
+ * Scoped styles for the playable demo widget embedded in the landing page.
+ * All styles are namespaced under .flash-demo to avoid conflicts.
+ *
+ * Design tokens matched to main landing page:
+ * - Primary: #6200EE (purple)
+ * - Success: #03DAC6 (teal)
+ * - Error: #CF6679 (muted red)
+ */
+
+/* Demo Section Container */
+.flash-demo {
+    padding: 4.8rem 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+}
+
+.flash-demo .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2.4rem;
+}
+
+/* Section Header */
+.flash-demo__header {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+
+.flash-demo__title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+}
+
+.flash-demo__subtitle {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+}
+
+.flash-demo__badge {
+    display: inline-block;
+    background: rgba(98, 0, 238, 0.3);
+    color: #BB86FC;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+/* Meta Stats Row */
+.flash-demo__meta {
+    display: flex;
+    justify-content: center;
+    gap: 2.4rem;
+    margin-bottom: 1.6rem;
+    flex-wrap: wrap;
+}
+
+.flash-demo__stat {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.flash-demo__stat-icon {
+    font-size: 1.6rem;
+}
+
+.flash-demo__stat-value {
+    font-weight: 700;
+    color: #BB86FC;
+    min-width: 2.4rem;
+    text-align: center;
+}
+
+/* Question Card */
+.flash-demo__card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.4rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    color: #121212;
+    margin-bottom: 1.6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.flash-demo__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6200EE, #BB86FC);
+}
+
+/* Question Type Label */
+.flash-demo__type {
+    display: inline-block;
+    background: #F5F5F5;
+    color: #6200EE;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.6rem;
+}
+
+/* Question Prompt */
+.flash-demo__prompt {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #121212;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    min-height: 5rem;
+}
+
+/* Answer Options */
+.flash-demo__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 1.6rem;
+}
+
+.flash-demo__option {
+    background: #F5F5F5;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 1.4rem 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #121212;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-family: inherit;
+    position: relative;
+}
+
+.flash-demo__option:hover:not(:disabled) {
+    background: #E8E0F0;
+    border-color: #6200EE;
+    transform: translateY(-2px);
+}
+
+.flash-demo__option:focus {
+    outline: 3px solid #BB86FC;
+    outline-offset: 2px;
+}
+
+.flash-demo__option:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Keyboard shortcut hint */
+.flash-demo__option::before {
+    content: attr(data-key);
+    position: absolute;
+    top: 0.4rem;
+    left: 0.6rem;
+    font-size: 1rem;
+    color: #9E9E9E;
+    font-weight: 600;
+}
+
+/* Correct/Wrong States */
+.flash-demo__option--correct {
+    background: #E8F5E9 !important;
+    border-color: #03DAC6 !important;
+    color: #00796B !important;
+}
+
+.flash-demo__option--correct::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: #00796B;
+    font-weight: 700;
+}
+
+.flash-demo__option--wrong {
+    background: #FFEBEE !important;
+    border-color: #CF6679 !important;
+    color: #B00020 !important;
+}
+
+.flash-demo__option--wrong::after {
+    content: '✗';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: #B00020;
+    font-weight: 700;
+}
+
+/* Feedback Area */
+.flash-demo__feedback {
+    min-height: 4.8rem;
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.flash-demo__feedback--visible {
+    opacity: 1;
+}
+
+.flash-demo__feedback--correct {
+    background: rgba(3, 218, 198, 0.15);
+    color: #00796B;
+    border: 1px solid rgba(3, 218, 198, 0.3);
+}
+
+.flash-demo__feedback--wrong {
+    background: rgba(207, 102, 121, 0.15);
+    color: #CF6679;
+    border: 1px solid rgba(207, 102, 121, 0.3);
+}
+
+/* Controls Row */
+.flash-demo__controls {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.flash-demo__btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.flash-demo__btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.flash-demo__btn:focus {
+    outline: 3px solid #BB86FC;
+    outline-offset: 2px;
+}
+
+.flash-demo__btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.flash-demo__btn--primary {
+    background: #6200EE;
+    border-color: #6200EE;
+}
+
+.flash-demo__btn--primary:hover:not(:disabled) {
+    background: #7C4DFF;
+}
+
+/* Keyboard Tip */
+.flash-demo__tip {
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 1.6rem;
+}
+
+.flash-demo__tip kbd {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    font-family: inherit;
+    font-size: 1.1rem;
+    margin: 0 0.2rem;
+}
+
+/* End Screen */
+.flash-demo__complete {
+    text-align: center;
+    padding: 2rem;
+}
+
+.flash-demo__complete-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.flash-demo__complete-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.flash-demo__complete-score {
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 2rem;
+}
+
+.flash-demo__complete-score strong {
+    color: #6200EE;
+    font-size: 2rem;
+}
+
+/* Accessibility: Screen reader only */
+.flash-demo__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Progress Bar */
+.flash-demo__progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1.6rem;
+}
+
+.flash-demo__progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6200EE, #BB86FC);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .flash-demo__title {
+        font-size: 2rem;
+    }
+
+    .flash-demo__options {
+        grid-template-columns: 1fr;
+    }
+
+    .flash-demo__prompt {
+        font-size: 1.6rem;
+    }
+
+    .flash-demo__meta {
+        gap: 1.6rem;
+    }
+
+    .flash-demo__card {
+        padding: 1.6rem;
+    }
+
+    .flash-demo__controls {
+        flex-direction: column;
+    }
+
+    .flash-demo__btn {
+        width: 100%;
+    }
+}
+
+/* Animation for card entrance */
+@keyframes flash-demo-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.flash-demo__card--animate {
+    animation: flash-demo-fadeIn 0.3s ease forwards;
+}
