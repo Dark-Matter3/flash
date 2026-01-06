@@ -1,7 +1,7 @@
 /**
  * Flash Mini Demo - Swipe Card Styles
  * ====================================
- * 
+ *
  * Styles for the binary swipe-based vocabulary demo.
  * Mobile-first, system fonts, no external dependencies.
  */
@@ -22,7 +22,7 @@
   --demo-border: #e0e0e0;
   --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   --demo-radius: 16px;
-  
+
   background: var(--demo-bg);
   padding: 3rem 1rem;
 }
@@ -49,6 +49,27 @@
   font-size: 1rem;
   margin: 0;
   line-height: 1.4;
+}
+
+.flash-demo__beta-notice {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--demo-primary-dark);
+  background: rgba(98, 0, 238, 0.08);
+  border-radius: 999px;
+  border: 1px solid rgba(98, 0, 238, 0.2);
+}
+
+.flash-demo__beta-notice a {
+  color: var(--demo-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.flash-demo__beta-notice a:hover {
+  color: var(--demo-primary-dark);
 }
 
 /* ==========================================
@@ -410,6 +431,32 @@
 }
 
 /* ==========================================
+   BETA CTA
+   ========================================== */
+.flash-demo__beta-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--demo-border);
+}
+
+.flash-demo__beta-cta p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--demo-text-muted);
+}
+
+.flash-demo__beta-cta a {
+  color: var(--demo-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.flash-demo__beta-cta a:hover {
+  color: var(--demo-primary-dark);
+}
+
+/* ==========================================
    COMPLETE SCREEN
    ========================================== */
 .flash-demo__card--complete {
@@ -461,7 +508,28 @@
   color: var(--demo-text-muted);
   font-size: 0.95rem;
   line-height: 1.5;
+  margin: 0 0 0.75rem;
+}
+
+.flash-demo__complete-beta {
+  font-size: 0.9rem;
+  color: var(--demo-text);
+  line-height: 1.5;
   margin: 0;
+  padding: 0.75rem 1rem;
+  background: rgba(98, 0, 238, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(98, 0, 238, 0.15);
+}
+
+.flash-demo__complete-beta a {
+  color: var(--demo-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.flash-demo__complete-beta a:hover {
+  color: var(--demo-primary-dark);
 }
 
 /* ==========================================
@@ -486,21 +554,21 @@
   .flash-demo {
     padding: 2rem 0.75rem;
   }
-  
+
   .flash-demo__title {
     font-size: 1.5rem;
   }
-  
+
   .flash-demo__prompt {
     font-size: 1.25rem;
   }
-  
+
   .flash-demo__choice {
     padding: 0.75rem 0.5rem;
     font-size: 0.9rem;
     min-height: 50px;
   }
-  
+
   .flash-demo__choice-arrow {
     font-size: 1rem;
   }

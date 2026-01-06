@@ -1,14 +1,14 @@
 /**
  * Flash Mini Demo - Swipe Card Game
  * ==================================
- * 
+ *
  * A binary swipe-based vocabulary game that mimics Flash's core gameplay.
- * 
+ *
  * INTERACTION MODEL:
  * - Swipe card left/right (touch or mouse drag)
  * - Click left/right choice buttons
  * - Keyboard: ← → arrows, R to restart
- * 
+ *
  * QUESTION FORMAT:
  * Each question has exactly 2 options (left vs right).
  * {
@@ -36,7 +36,7 @@
       leftOption: 'is',
       rightOption: 'are',
       correctSide: 'left',
-      explanation: 'Use "is" with he/she/it.'
+      explanation: 'Use "is" with he/she/it.',
     },
     {
       id: 'q2',
@@ -45,7 +45,7 @@
       leftOption: 'is',
       rightOption: 'are',
       correctSide: 'right',
-      explanation: 'Use "are" with they/we/you.'
+      explanation: 'Use "are" with they/we/you.',
     },
     {
       id: 'q3',
@@ -54,7 +54,7 @@
       leftOption: 'went',
       rightOption: 'goed',
       correctSide: 'left',
-      explanation: '"Went" is the irregular past of "go".'
+      explanation: '"Went" is the irregular past of "go".',
     },
     {
       id: 'q4',
@@ -63,7 +63,7 @@
       leftOption: 'maked',
       rightOption: 'made',
       correctSide: 'right',
-      explanation: '"Made" is the irregular past of "make".'
+      explanation: '"Made" is the irregular past of "make".',
     },
     {
       id: 'q5',
@@ -72,7 +72,7 @@
       leftOption: 'on',
       rightOption: 'in',
       correctSide: 'left',
-      explanation: 'Use "on" with days of the week.'
+      explanation: 'Use "on" with days of the week.',
     },
     {
       id: 'q6',
@@ -81,7 +81,7 @@
       leftOption: 'at',
       rightOption: 'in',
       correctSide: 'right',
-      explanation: 'Use "in" with years and months.'
+      explanation: 'Use "in" with years and months.',
     },
     {
       id: 'q7',
@@ -90,7 +90,7 @@
       leftOption: 'at',
       rightOption: 'on',
       correctSide: 'left',
-      explanation: 'Use "at" with specific times.'
+      explanation: 'Use "at" with specific times.',
     },
     {
       id: 'q8',
@@ -99,7 +99,7 @@
       leftOption: 'can be trusted',
       rightOption: 'breaks easily',
       correctSide: 'left',
-      explanation: 'Reliable = dependable, trustworthy.'
+      explanation: 'Reliable = dependable, trustworthy.',
     },
     {
       id: 'q9',
@@ -108,7 +108,7 @@
       leftOption: 'to ignore',
       rightOption: 'to concentrate',
       correctSide: 'right',
-      explanation: 'Focus = concentrate attention.'
+      explanation: 'Focus = concentrate attention.',
     },
     {
       id: 'q10',
@@ -117,7 +117,7 @@
       leftOption: 'make better',
       rightOption: 'make worse',
       correctSide: 'left',
-      explanation: 'Improve = get better at something.'
+      explanation: 'Improve = get better at something.',
     },
     {
       id: 'q11',
@@ -126,7 +126,7 @@
       leftOption: 'do',
       rightOption: 'make',
       correctSide: 'left',
-      explanation: 'We say "do homework", not "make".'
+      explanation: 'We say "do homework", not "make".',
     },
     {
       id: 'q12',
@@ -135,8 +135,8 @@
       leftOption: 'do',
       rightOption: 'make',
       correctSide: 'right',
-      explanation: 'We say "make progress", not "do".'
-    }
+      explanation: 'We say "make progress", not "do".',
+    },
   ];
 
   // ==========================================
@@ -149,14 +149,14 @@
     highStreak: 0,
     answered: false,
     questionOrder: [],
-    missedQuestions: []
+    missedQuestions: [],
   };
 
   // Swipe state
   let swipe = {
     startX: 0,
     currentX: 0,
-    isDragging: false
+    isDragging: false,
   };
 
   // Constants
@@ -199,6 +199,7 @@
         <div class="flash-demo__header">
           <h2 class="flash-demo__title" id="demo-title">Try Flash</h2>
           <p class="flash-demo__subtitle">Swipe left or right to answer. How long can you keep your streak?</p>
+          <p class="flash-demo__beta-notice">🧪 This is a mini demo. <a href="#contact">Join the closed beta</a> to try the full app!</p>
         </div>
 
         <!-- Stats Bar -->
@@ -227,7 +228,7 @@
           <div class="flash-demo__card" id="demo-card">
             <span class="flash-demo__type" id="demo-type">Grammar</span>
             <p class="flash-demo__prompt" id="demo-prompt">Loading...</p>
-            
+
             <!-- Feedback Overlay (shown on answer) -->
             <div class="flash-demo__card-feedback" id="demo-card-feedback">
               <span class="flash-demo__card-feedback-icon" id="demo-feedback-icon">✅</span>
@@ -268,6 +269,11 @@
           </button>
         </div>
 
+        <!-- Beta CTA -->
+        <div class="flash-demo__beta-cta">
+          <p>Want the full experience? <a href="#contact">Request closed beta access</a></p>
+        </div>
+
         <!-- Screen Reader Announcements -->
         <div class="flash-demo__sr-only" id="demo-announcer" aria-live="assertive"></div>
       </div>
@@ -293,7 +299,7 @@
       progress: document.getElementById('demo-progress'),
       progressFill: document.getElementById('demo-progress-fill'),
       restartBtn: document.getElementById('demo-restart'),
-      announcer: document.getElementById('demo-announcer')
+      announcer: document.getElementById('demo-announcer'),
     };
   }
 
@@ -301,21 +307,21 @@
     // Choice button clicks
     elements.choiceLeft.addEventListener('click', () => handleAnswer('left'));
     elements.choiceRight.addEventListener('click', () => handleAnswer('right'));
-    
+
     // Restart
     elements.restartBtn.addEventListener('click', handleRestart);
-    
+
     // Keyboard
     document.addEventListener('keydown', handleKeyboard);
-    
+
     // Swipe/Drag events on card
     const card = elements.card;
-    
+
     // Mouse events
     card.addEventListener('mousedown', onDragStart);
     document.addEventListener('mousemove', onDragMove);
     document.addEventListener('mouseup', onDragEnd);
-    
+
     // Touch events
     card.addEventListener('touchstart', onDragStart, { passive: true });
     document.addEventListener('touchmove', onDragMove, { passive: false });
@@ -327,25 +333,27 @@
   // ==========================================
   function onDragStart(e) {
     if (state.answered) return;
-    
+
     swipe.isDragging = true;
     swipe.startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
     swipe.currentX = swipe.startX;
-    
+
     elements.card.style.transition = 'none';
     elements.card.classList.add('flash-demo__card--dragging');
   }
 
   function onDragMove(e) {
     if (!swipe.isDragging || state.answered) return;
-    
-    swipe.currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+
+    swipe.currentX = e.type.includes('touch')
+      ? e.touches[0].clientX
+      : e.clientX;
     const deltaX = swipe.currentX - swipe.startX;
-    
+
     // Apply transform
     const rotation = deltaX * CARD_ROTATE_FACTOR;
     elements.card.style.transform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
-    
+
     // Show swipe hints based on direction
     const threshold = SWIPE_THRESHOLD * 0.5;
     if (deltaX < -threshold) {
@@ -358,7 +366,7 @@
       elements.hintLeft.classList.remove('flash-demo__swipe-hint--active');
       elements.hintRight.classList.remove('flash-demo__swipe-hint--active');
     }
-    
+
     // Prevent scroll on touch
     if (e.type.includes('touch') && Math.abs(deltaX) > 10) {
       e.preventDefault();
@@ -367,22 +375,22 @@
 
   function onDragEnd() {
     if (!swipe.isDragging) return;
-    
+
     swipe.isDragging = false;
     elements.card.classList.remove('flash-demo__card--dragging');
-    
+
     const deltaX = swipe.currentX - swipe.startX;
-    
+
     // Reset hints
     elements.hintLeft.classList.remove('flash-demo__swipe-hint--active');
     elements.hintRight.classList.remove('flash-demo__swipe-hint--active');
-    
+
     if (state.answered) {
       elements.card.style.transform = '';
       elements.card.style.transition = '';
       return;
     }
-    
+
     // Check if swipe threshold met
     if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
       const direction = deltaX < 0 ? 'left' : 'right';
@@ -405,7 +413,7 @@
       highStreak: 0,
       answered: false,
       questionOrder: shuffleArray([...QUESTIONS]),
-      missedQuestions: []
+      missedQuestions: [],
     };
 
     updateStats();
@@ -422,7 +430,7 @@
 
   function renderQuestion() {
     const question = getCurrentQuestion();
-    
+
     if (!question) {
       renderComplete();
       return;
@@ -432,20 +440,24 @@
     elements.card.className = 'flash-demo__card';
     elements.card.style.transform = '';
     elements.card.style.transition = '';
-    elements.cardFeedback.classList.remove('flash-demo__card-feedback--visible');
-    
+    elements.cardFeedback.classList.remove(
+      'flash-demo__card-feedback--visible'
+    );
+
     // Update content
     elements.type.textContent = question.type;
     elements.prompt.textContent = question.prompt;
     elements.choiceLeftText.textContent = question.leftOption;
     elements.choiceRightText.textContent = question.rightOption;
-    
+
     // Reset choice buttons
     elements.choiceLeft.disabled = false;
     elements.choiceRight.disabled = false;
-    elements.choiceLeft.className = 'flash-demo__choice flash-demo__choice--left';
-    elements.choiceRight.className = 'flash-demo__choice flash-demo__choice--right';
-    
+    elements.choiceLeft.className =
+      'flash-demo__choice flash-demo__choice--left';
+    elements.choiceRight.className =
+      'flash-demo__choice flash-demo__choice--right';
+
     state.answered = false;
 
     // Animate card in
@@ -454,17 +466,21 @@
       elements.card.classList.remove('flash-demo__card--enter');
     }, 300);
 
-    announce(`Question ${state.currentIndex + 1}. ${question.type}. ${question.prompt}. Left: ${question.leftOption}. Right: ${question.rightOption}.`);
+    announce(
+      `Question ${state.currentIndex + 1}. ${question.type}. ${
+        question.prompt
+      }. Left: ${question.leftOption}. Right: ${question.rightOption}.`
+    );
   }
 
   function handleAnswer(side) {
     if (state.answered) return;
-    
+
     state.answered = true;
-    
+
     const question = getCurrentQuestion();
     const isCorrect = side === question.correctSide;
-    
+
     // Update stats
     if (isCorrect) {
       state.score++;
@@ -477,39 +493,47 @@
       // Micro-spaced repetition: reinsert wrong question
       if (!state.missedQuestions.includes(question.id)) {
         state.missedQuestions.push(question.id);
-        const reinsertIndex = Math.min(state.currentIndex + 3, getTotalQuestions());
-        state.questionOrder.splice(reinsertIndex, 0, { ...question, id: question.id + '_retry' });
+        const reinsertIndex = Math.min(
+          state.currentIndex + 3,
+          getTotalQuestions()
+        );
+        state.questionOrder.splice(reinsertIndex, 0, {
+          ...question,
+          id: question.id + '_retry',
+        });
       }
     }
-    
+
     updateStats();
-    
+
     // Show feedback on card
     showCardFeedback(isCorrect, question.explanation);
-    
+
     // Animate card exit
     elements.card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
     const exitX = side === 'left' ? -300 : 300;
     const exitRotation = side === 'left' ? -15 : 15;
     elements.card.style.transform = `translateX(${exitX}px) rotate(${exitRotation}deg)`;
     elements.card.style.opacity = '0.5';
-    
+
     // Highlight correct choice
     if (question.correctSide === 'left') {
       elements.choiceLeft.classList.add('flash-demo__choice--correct');
-      if (!isCorrect) elements.choiceRight.classList.add('flash-demo__choice--wrong');
+      if (!isCorrect)
+        elements.choiceRight.classList.add('flash-demo__choice--wrong');
     } else {
       elements.choiceRight.classList.add('flash-demo__choice--correct');
-      if (!isCorrect) elements.choiceLeft.classList.add('flash-demo__choice--wrong');
+      if (!isCorrect)
+        elements.choiceLeft.classList.add('flash-demo__choice--wrong');
     }
-    
+
     // Disable buttons
     elements.choiceLeft.disabled = true;
     elements.choiceRight.disabled = true;
-    
+
     // Announce result
     announce(isCorrect ? 'Correct!' : `Incorrect. ${question.explanation}`);
-    
+
     // Auto-advance after delay
     setTimeout(() => {
       state.currentIndex++;
@@ -521,16 +545,19 @@
   function showCardFeedback(isCorrect, explanation) {
     elements.feedbackIcon.textContent = isCorrect ? '✅' : '❌';
     elements.feedbackText.textContent = isCorrect ? 'Correct!' : explanation;
-    elements.cardFeedback.className = 'flash-demo__card-feedback flash-demo__card-feedback--visible';
+    elements.cardFeedback.className =
+      'flash-demo__card-feedback flash-demo__card-feedback--visible';
     elements.cardFeedback.classList.add(
-      isCorrect ? 'flash-demo__card-feedback--correct' : 'flash-demo__card-feedback--wrong'
+      isCorrect
+        ? 'flash-demo__card-feedback--correct'
+        : 'flash-demo__card-feedback--wrong'
     );
   }
 
   function renderComplete() {
     const percentage = Math.round((state.score / QUESTIONS.length) * 100);
     const emoji = percentage >= 80 ? '🎉' : percentage >= 50 ? '👍' : '💪';
-    
+
     elements.card.className = 'flash-demo__card flash-demo__card--complete';
     elements.card.style.transform = '';
     elements.card.style.opacity = '1';
@@ -540,36 +567,54 @@
         <h3 class="flash-demo__complete-title">Demo Complete!</h3>
         <div class="flash-demo__complete-stats">
           <div class="flash-demo__complete-stat">
-            <span class="flash-demo__complete-stat-value">${state.score}/${QUESTIONS.length}</span>
+            <span class="flash-demo__complete-stat-value">${state.score}/${
+      QUESTIONS.length
+    }</span>
             <span class="flash-demo__complete-stat-label">Score</span>
           </div>
           <div class="flash-demo__complete-stat">
-            <span class="flash-demo__complete-stat-value">${state.highStreak}</span>
+            <span class="flash-demo__complete-stat-value">${
+              state.highStreak
+            }</span>
             <span class="flash-demo__complete-stat-label">Best Streak</span>
           </div>
         </div>
         <p class="flash-demo__complete-cta">
-          ${percentage >= 80 ? 'Excellent!' : percentage >= 50 ? 'Good effort!' : 'Keep practicing!'}<br>
-          Download Flash for 1000+ questions.
+          ${
+            percentage >= 80
+              ? 'Excellent!'
+              : percentage >= 50
+              ? 'Good effort!'
+              : 'Keep practicing!'
+          }
+        </p>
+        <p class="flash-demo__complete-beta">
+          🧪 This was just a taste!<br>
+          <a href="#contact">Join the closed beta</a> for 1000+ questions & full features.
         </p>
       </div>
     `;
-    
+
     // Hide choice buttons
     elements.choiceLeft.style.visibility = 'hidden';
     elements.choiceRight.style.visibility = 'hidden';
-    
-    announce(`Demo complete. You scored ${state.score} out of ${QUESTIONS.length}. Best streak: ${state.highStreak}.`);
+
+    announce(
+      `Demo complete. You scored ${state.score} out of ${QUESTIONS.length}. Best streak: ${state.highStreak}.`
+    );
   }
 
   function updateStats() {
     elements.score.textContent = state.score;
     elements.streak.textContent = state.streak;
-    elements.progress.textContent = `${Math.min(state.currentIndex + 1, QUESTIONS.length)}/${QUESTIONS.length}`;
-    
+    elements.progress.textContent = `${Math.min(
+      state.currentIndex + 1,
+      QUESTIONS.length
+    )}/${QUESTIONS.length}`;
+
     const progressPercent = (state.currentIndex / QUESTIONS.length) * 100;
     elements.progressFill.style.width = `${progressPercent}%`;
-    
+
     // Streak emphasis animation
     if (state.streak >= 3) {
       elements.streak.parentElement.classList.add('flash-demo__stat--hot');
@@ -582,7 +627,7 @@
     // Reset visibility of choice buttons
     elements.choiceLeft.style.visibility = '';
     elements.choiceRight.style.visibility = '';
-    
+
     resetGame();
     announce('Demo restarted.');
   }
@@ -596,7 +641,11 @@
 
     // Don't capture if typing in input
     const activeElement = document.activeElement;
-    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+    if (
+      activeElement &&
+      (activeElement.tagName === 'INPUT' ||
+        activeElement.tagName === 'TEXTAREA')
+    ) {
       return;
     }
 
@@ -642,5 +691,4 @@
   // START
   // ==========================================
   init();
-
 })();
