@@ -181,9 +181,13 @@
   }
 
   function setup() {
-    const container = document.getElementById('flash-demo');
+    // Try new container first, fall back to old one
+    let container = document.getElementById('demo-phone-container');
     if (!container) {
-      console.warn('Flash Demo: Container #flash-demo not found');
+      container = document.getElementById('flash-demo');
+    }
+    if (!container) {
+      console.warn('Flash Demo: Container not found');
       return;
     }
 
@@ -199,12 +203,6 @@
         <div class="phone-frame">
           <div class="phone-notch"></div>
           <div class="phone-screen">
-            <div class="flash-demo__header">
-              <h2 class="flash-demo__title" id="demo-title">Try Flash</h2>
-              <p class="flash-demo__subtitle">Swipe left or right to answer. How long can you keep your streak?</p>
-              <p class="flash-demo__beta-notice">🧪 This is a mini demo. <a href="#contact">Join the closed beta</a> to try the full app!</p>
-            </div>
-
             <!-- Stats Bar -->
             <div class="flash-demo__stats">
               <div class="flash-demo__stat">
@@ -260,21 +258,11 @@
               </button>
             </div>
 
-            <!-- Helper Text -->
-            <p class="flash-demo__tip">
-              Swipe the card or use <kbd>←</kbd> <kbd>→</kbd> arrow keys
-            </p>
-
             <!-- Restart Button -->
             <div class="flash-demo__controls">
               <button class="flash-demo__btn" id="demo-restart" type="button">
                 Restart Demo
               </button>
-            </div>
-
-            <!-- Beta CTA -->
-            <div class="flash-demo__beta-cta">
-              <p>Want the full experience? <a href="#contact">Request closed beta access</a></p>
             </div>
 
             <!-- Screen Reader Announcements -->
