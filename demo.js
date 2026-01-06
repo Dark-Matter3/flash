@@ -480,6 +480,18 @@
 
     const question = getCurrentQuestion();
     const isCorrect = side === question.correctSide;
+    const selectedBtn = side === 'left' ? elements.choiceLeft : elements.choiceRight;
+
+    // Apply flash animation to card and selected button
+    const flashClass = isCorrect ? 'flash-correct' : 'flash-wrong';
+    elements.card.classList.add(flashClass);
+    selectedBtn.classList.add(flashClass);
+    
+    // Remove flash classes after animation completes
+    setTimeout(() => {
+      elements.card.classList.remove(flashClass);
+      selectedBtn.classList.remove(flashClass);
+    }, 200);
 
     // Update stats
     if (isCorrect) {

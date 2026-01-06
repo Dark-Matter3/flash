@@ -228,6 +228,54 @@
   }
 }
 
+/* Flash feedback animation (momentary pulse) */
+@keyframes flashPulse {
+  0%   { opacity: 0; }
+  35%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.flash-demo__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--demo-radius);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flash-demo__card.flash-correct::before {
+  background: rgba(0, 200, 83, 0.2);
+  animation: flashPulse 180ms ease-out;
+}
+
+.flash-demo__card.flash-wrong::before {
+  background: rgba(255, 82, 82, 0.2);
+  animation: flashPulse 180ms ease-out;
+}
+
+/* Button flash animation */
+.flash-demo__choice::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flash-demo__choice.flash-correct::before {
+  background: rgba(0, 200, 83, 0.25);
+  animation: flashPulse 180ms ease-out;
+}
+
+.flash-demo__choice.flash-wrong::before {
+  background: rgba(255, 82, 82, 0.25);
+  animation: flashPulse 180ms ease-out;
+}
+
 /* ==========================================
    CARD FEEDBACK OVERLAY
    ========================================== */
@@ -325,6 +373,8 @@
 }
 
 .flash-demo__choice {
+  position: relative;
+  overflow: hidden;
   flex: 1;
   display: flex;
   align-items: center;
