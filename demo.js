@@ -195,87 +195,92 @@
 
   function buildDemoHTML() {
     return `
-      <div class="container">
-        <div class="flash-demo__header">
-          <h2 class="flash-demo__title" id="demo-title">Try Flash</h2>
-          <p class="flash-demo__subtitle">Swipe left or right to answer. How long can you keep your streak?</p>
-          <p class="flash-demo__beta-notice">🧪 This is a mini demo. <a href="#contact">Join the closed beta</a> to try the full app!</p>
-        </div>
-
-        <!-- Stats Bar -->
-        <div class="flash-demo__stats">
-          <div class="flash-demo__stat">
-            <span class="flash-demo__stat-label">Score</span>
-            <span class="flash-demo__stat-value" id="demo-score">0</span>
-          </div>
-          <div class="flash-demo__stat flash-demo__stat--streak">
-            <span class="flash-demo__stat-label">🔥 Streak</span>
-            <span class="flash-demo__stat-value" id="demo-streak">0</span>
-          </div>
-          <div class="flash-demo__stat">
-            <span class="flash-demo__stat-label">Progress</span>
-            <span class="flash-demo__stat-value" id="demo-progress">1/12</span>
-          </div>
-        </div>
-
-        <!-- Progress Bar -->
-        <div class="flash-demo__progress-bar">
-          <div class="flash-demo__progress-fill" id="demo-progress-fill"></div>
-        </div>
-
-        <!-- Swipe Card Area -->
-        <div class="flash-demo__card-area">
-          <div class="flash-demo__card" id="demo-card">
-            <span class="flash-demo__type" id="demo-type">Grammar</span>
-            <p class="flash-demo__prompt" id="demo-prompt">Loading...</p>
-
-            <!-- Feedback Overlay (shown on answer) -->
-            <div class="flash-demo__card-feedback" id="demo-card-feedback">
-              <span class="flash-demo__card-feedback-icon" id="demo-feedback-icon">✅</span>
-              <span class="flash-demo__card-feedback-text" id="demo-feedback-text">Correct!</span>
+      <div class="phone-preview">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="flash-demo__header">
+              <h2 class="flash-demo__title" id="demo-title">Try Flash</h2>
+              <p class="flash-demo__subtitle">Swipe left or right to answer. How long can you keep your streak?</p>
+              <p class="flash-demo__beta-notice">🧪 This is a mini demo. <a href="#contact">Join the closed beta</a> to try the full app!</p>
             </div>
+
+            <!-- Stats Bar -->
+            <div class="flash-demo__stats">
+              <div class="flash-demo__stat">
+                <span class="flash-demo__stat-label">Score</span>
+                <span class="flash-demo__stat-value" id="demo-score">0</span>
+              </div>
+              <div class="flash-demo__stat flash-demo__stat--streak">
+                <span class="flash-demo__stat-label">🔥 Streak</span>
+                <span class="flash-demo__stat-value" id="demo-streak">0</span>
+              </div>
+              <div class="flash-demo__stat">
+                <span class="flash-demo__stat-label">Progress</span>
+                <span class="flash-demo__stat-value" id="demo-progress">1/12</span>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="flash-demo__progress-bar">
+              <div class="flash-demo__progress-fill" id="demo-progress-fill"></div>
+            </div>
+
+            <!-- Swipe Card Area -->
+            <div class="flash-demo__card-area">
+              <div class="flash-demo__card" id="demo-card">
+                <span class="flash-demo__type" id="demo-type">Grammar</span>
+                <p class="flash-demo__prompt" id="demo-prompt">Loading...</p>
+
+                <!-- Feedback Overlay (shown on answer) -->
+                <div class="flash-demo__card-feedback" id="demo-card-feedback">
+                  <span class="flash-demo__card-feedback-icon" id="demo-feedback-icon">✅</span>
+                  <span class="flash-demo__card-feedback-text" id="demo-feedback-text">Correct!</span>
+                </div>
+              </div>
+
+              <!-- Swipe Indicators -->
+              <div class="flash-demo__swipe-hint flash-demo__swipe-hint--left" id="hint-left">
+                <span>←</span>
+              </div>
+              <div class="flash-demo__swipe-hint flash-demo__swipe-hint--right" id="hint-right">
+                <span>→</span>
+              </div>
+            </div>
+
+            <!-- Choice Buttons -->
+            <div class="flash-demo__choices">
+              <button class="flash-demo__choice flash-demo__choice--left" id="choice-left" type="button">
+                <span class="flash-demo__choice-arrow">←</span>
+                <span class="flash-demo__choice-text" id="choice-left-text">Option A</span>
+              </button>
+              <button class="flash-demo__choice flash-demo__choice--right" id="choice-right" type="button">
+                <span class="flash-demo__choice-text" id="choice-right-text">Option B</span>
+                <span class="flash-demo__choice-arrow">→</span>
+              </button>
+            </div>
+
+            <!-- Helper Text -->
+            <p class="flash-demo__tip">
+              Swipe the card or use <kbd>←</kbd> <kbd>→</kbd> arrow keys
+            </p>
+
+            <!-- Restart Button -->
+            <div class="flash-demo__controls">
+              <button class="flash-demo__btn" id="demo-restart" type="button">
+                Restart Demo
+              </button>
+            </div>
+
+            <!-- Beta CTA -->
+            <div class="flash-demo__beta-cta">
+              <p>Want the full experience? <a href="#contact">Request closed beta access</a></p>
+            </div>
+
+            <!-- Screen Reader Announcements -->
+            <div class="flash-demo__sr-only" id="demo-announcer" aria-live="assertive"></div>
           </div>
-
-          <!-- Swipe Indicators -->
-          <div class="flash-demo__swipe-hint flash-demo__swipe-hint--left" id="hint-left">
-            <span>←</span>
-          </div>
-          <div class="flash-demo__swipe-hint flash-demo__swipe-hint--right" id="hint-right">
-            <span>→</span>
-          </div>
         </div>
-
-        <!-- Choice Buttons -->
-        <div class="flash-demo__choices">
-          <button class="flash-demo__choice flash-demo__choice--left" id="choice-left" type="button">
-            <span class="flash-demo__choice-arrow">←</span>
-            <span class="flash-demo__choice-text" id="choice-left-text">Option A</span>
-          </button>
-          <button class="flash-demo__choice flash-demo__choice--right" id="choice-right" type="button">
-            <span class="flash-demo__choice-text" id="choice-right-text">Option B</span>
-            <span class="flash-demo__choice-arrow">→</span>
-          </button>
-        </div>
-
-        <!-- Helper Text -->
-        <p class="flash-demo__tip">
-          Swipe the card or use <kbd>←</kbd> <kbd>→</kbd> arrow keys
-        </p>
-
-        <!-- Restart Button -->
-        <div class="flash-demo__controls">
-          <button class="flash-demo__btn" id="demo-restart" type="button">
-            Restart Demo
-          </button>
-        </div>
-
-        <!-- Beta CTA -->
-        <div class="flash-demo__beta-cta">
-          <p>Want the full experience? <a href="#contact">Request closed beta access</a></p>
-        </div>
-
-        <!-- Screen Reader Announcements -->
-        <div class="flash-demo__sr-only" id="demo-announcer" aria-live="assertive"></div>
       </div>
     `;
   }
@@ -480,13 +485,14 @@
 
     const question = getCurrentQuestion();
     const isCorrect = side === question.correctSide;
-    const selectedBtn = side === 'left' ? elements.choiceLeft : elements.choiceRight;
+    const selectedBtn =
+      side === 'left' ? elements.choiceLeft : elements.choiceRight;
 
     // Apply flash animation to card and selected button
     const flashClass = isCorrect ? 'flash-correct' : 'flash-wrong';
     elements.card.classList.add(flashClass);
     selectedBtn.classList.add(flashClass);
-    
+
     // Remove flash classes after animation completes
     setTimeout(() => {
       elements.card.classList.remove(flashClass);
