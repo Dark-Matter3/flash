@@ -283,61 +283,115 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ========================
-   DOWNLOAD SECTION
+   BETA WAITLIST SECTION
    ======================== */
-.download {
+.beta {
     padding: var(--spacing-xxl) 0;
-    background-color: var(--surface);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     text-align: center;
 }
 
-.download p {
-    max-width: 60rem;
-    margin: 0 auto var(--spacing-xl);
-    font-size: 1.8rem;
-    color: var(--text-secondary);
+.beta-content {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.store-buttons {
+.beta-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.beta h2 {
+    color: #fff;
+    font-size: 3.2rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.beta-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-xl);
+}
+
+.beta-details {
     display: flex;
     justify-content: center;
     gap: var(--spacing-lg);
     flex-wrap: wrap;
+    margin-bottom: var(--spacing-xl);
 }
 
-.store-btn {
+.beta-detail {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    background-color: var(--text-primary);
-    color: #fff;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: var(--radius-md);
-    transition: background-color 0.2s ease;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.4rem;
 }
 
-.store-btn:hover {
-    background-color: #333;
-    color: #fff;
-}
-
-.store-icon {
-    font-size: 2.4rem;
-}
-
-.store-text {
-    text-align: left;
-    line-height: 1.2;
-}
-
-.store-text small {
-    font-size: 1rem;
-    opacity: 0.8;
-}
-
-.store-text strong {
+.beta-detail-icon {
     font-size: 1.6rem;
-    display: block;
+}
+
+.beta .btn-lg {
+    padding: 1.25rem 3rem;
+    font-size: 1.6rem;
+}
+
+.beta .btn-primary {
+    background: #fff;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.beta .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.beta-microcopy {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.3rem;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.beta-expectations {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.beta-expectations h4 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.beta-expectations ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.beta-expectations li {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.4rem;
+    padding: 0.5rem 0;
+    line-height: 1.4;
 }
 
 /* ========================
