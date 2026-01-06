@@ -166,6 +166,7 @@
    ========================================== */
 .flash-demo__card {
   position: relative;
+  overflow: hidden;
   width: 100%;
   max-width: 360px;
   min-height: 180px;
@@ -183,6 +184,12 @@
   touch-action: pan-y;
   will-change: transform;
   transition: box-shadow 0.2s ease;
+}
+
+/* Ensure card children are below flash overlay */
+.flash-demo__card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .flash-demo__card:active,
@@ -235,43 +242,44 @@
   100% { opacity: 0; }
 }
 
-.flash-demo__card::before {
+/* Card flash overlay - sits ABOVE all card content */
+.flash-demo__card::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: var(--demo-radius);
   opacity: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 10;
 }
 
-.flash-demo__card.flash-correct::before {
-  background: rgba(0, 200, 83, 0.2);
+.flash-demo__card.flash-correct::after {
+  background: rgba(0, 200, 83, 0.22);
   animation: flashPulse 180ms ease-out;
 }
 
-.flash-demo__card.flash-wrong::before {
-  background: rgba(255, 82, 82, 0.2);
+.flash-demo__card.flash-wrong::after {
+  background: rgba(255, 82, 82, 0.22);
   animation: flashPulse 180ms ease-out;
 }
 
-/* Button flash animation */
-.flash-demo__choice::before {
+/* Button flash overlay */
+.flash-demo__choice::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 12px;
   opacity: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 10;
 }
 
-.flash-demo__choice.flash-correct::before {
+.flash-demo__choice.flash-correct::after {
   background: rgba(0, 200, 83, 0.25);
   animation: flashPulse 180ms ease-out;
 }
 
-.flash-demo__choice.flash-wrong::before {
+.flash-demo__choice.flash-wrong::after {
   background: rgba(255, 82, 82, 0.25);
   animation: flashPulse 180ms ease-out;
 }
