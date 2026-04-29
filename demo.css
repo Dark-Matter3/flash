@@ -18,8 +18,11 @@
 
 .phone-frame {
   position: relative;
-  width: 100%;
-  max-width: 380px;
+  /* SIZE MATCH: phone-frame outer 300px → inner screen 280px (300 - 2×10px padding).
+     Inner screen 280px matches hero screenshot rendered width exactly.
+     At 280px wide (1080:2400 = 9:20 ratio), height = ~622px. */
+  width: 300px;
+  max-width: 300px;
   background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
   border-radius: 44px;
   padding: 10px;
@@ -58,15 +61,47 @@
   background: #ffffff;
   border-radius: 34px;
   padding: 2rem 0.75rem 1.25rem;
-  min-height: 520px;
+  /* SIZE MATCH: 602px = 622px (1080:2400 ratio at 280px width) minus phone frame padding (2×10px). */
+  min-height: 602px;
   overflow: hidden;
-  /* Ensure screen is bright and interactive-looking */
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+  display: flex;
+  flex-direction: column;
+  /* HARD FIX: ensure screen is fully bright, no dimming */
+  opacity: 1 !important;
+  filter: none !important;
 }
 
-/* Responsive phone frame */
+/* Ensure no pseudo-elements dim the screen */
+.phone-screen::before,
+.phone-screen::after {
+  content: none !important;
+}
+
+/* Ensure demo content inside is not dimmed */
+.phone-screen > * {
+  opacity: 1;
+  filter: none;
+}
+
+/* Phone screen color wash feedback */
+.phone-screen {
+  position: relative;
+  transition: background-color 0.15s ease-out;
+}
+
+.phone-screen.flash-correct {
+  background-color: rgba(0, 200, 83, 0.18);
+}
+
+.phone-screen.flash-wrong {
+  background-color: rgba(255, 82, 82, 0.18);
+}
+
+/* Responsive phone frame — reset explicit width on small screens */
 @media (max-width: 440px) {
   .phone-frame {
+    width: 100%;
+    max-width: 100%;
     border-radius: 0;
     padding: 0;
     background: transparent;
@@ -105,6 +140,42 @@
 
   background: var(--demo-bg);
   padding: 3rem 1rem;
+}
+
+/* Dark mode overrides for demo */
+@media (prefers-color-scheme: dark) {
+  .flash-demo {
+    --demo-primary: #BB86FC;
+    --demo-primary-dark: #9965DF;
+    --demo-bg: #121212;
+    --demo-card-bg: #1E1E1E;
+    --demo-text: #FFFFFF;
+    --demo-text-muted: #B3B3B3;
+    --demo-border: #3D3D3D;
+    --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .phone-screen {
+    background: #1E1E1E;
+  }
+
+  .phone-screen.flash-correct {
+    background-color: rgba(0, 200, 83, 0.25);
+  }
+
+  .phone-screen.flash-wrong {
+    background-color: rgba(255, 82, 82, 0.25);
+  }
+
+  /* Card feedback overlay in dark mode */
+  .flash-demo__card-feedback {
+    background: rgba(30, 30, 30, 0.95);
+  }
+
+  /* Type badge in dark mode */
+  .flash-demo__type {
+    background: rgba(187, 134, 252, 0.15);
+  }
 }
 
 .flash-demo .container {
@@ -153,7 +224,37 @@
 }
 
 /* ==========================================
-   STATS BAR
+   HEARTS BAR (demo-only, replaces score/streak)
+   ========================================== */
+.flash-demo__hearts-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--demo-card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.flash-demo__hearts {
+  display: flex;
+  gap: 4px;
+}
+
+.flash-demo__heart {
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.flash-demo__heart--lost {
+  opacity: 0.35;
+  transform: scale(0.85);
+}
+
+/* ==========================================
+   STATS BAR (kept for .flash-demo__stat shared usage)
    ========================================== */
 .flash-demo__stats {
   display: flex;
@@ -236,8 +337,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 220px;
-  margin-bottom: 1.5rem;
+  flex: 1;
+  min-height: 340px;
   perspective: 1000px;
 }
 
@@ -249,15 +350,17 @@
   overflow: hidden;
   width: 100%;
   max-width: 360px;
-  min-height: 180px;
+  /* Choices are now inside the card — content-driven height */
+  min-height: 320px;
   background: var(--demo-card-bg);
   border-radius: var(--demo-radius);
   box-shadow: var(--demo-shadow);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  gap: 0.75rem;
   text-align: center;
   cursor: grab;
   user-select: none;
@@ -266,10 +369,10 @@
   transition: box-shadow 0.2s ease;
 }
 
-/* Ensure card children are below flash overlay */
+/* Ensure card children are above flash overlay */
 .flash-demo__card > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .flash-demo__card:active,
@@ -286,7 +389,8 @@
   background: rgba(98, 0, 238, 0.1);
   padding: 0.3rem 0.85rem;
   border-radius: 999px;
-  margin-bottom: 1rem;
+  /* margin-bottom removed — card gap handles spacing */
+  margin-bottom: 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -297,6 +401,11 @@
   color: var(--demo-text);
   margin: 0;
   line-height: 1.4;
+  /* flex: 1 makes the prompt take remaining space, pushing choices to bottom */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Card enter animation */
@@ -322,7 +431,7 @@
   100% { opacity: 0; }
 }
 
-/* Card flash overlay - sits ABOVE all card content */
+/* Card flash overlay - sits ABOVE background, BELOW text */
 .flash-demo__card::after {
   content: "";
   position: absolute;
@@ -330,17 +439,17 @@
   border-radius: var(--demo-radius);
   opacity: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 1;
 }
 
 .flash-demo__card.flash-correct::after {
-  background: rgba(0, 200, 83, 0.22);
-  animation: flashPulse 180ms ease-out;
+  background: rgba(46, 204, 113, 0.22);
+  animation: flashPulse 160ms ease-out;
 }
 
 .flash-demo__card.flash-wrong::after {
-  background: rgba(255, 82, 82, 0.22);
-  animation: flashPulse 180ms ease-out;
+  background: rgba(255, 77, 77, 0.22);
+  animation: flashPulse 160ms ease-out;
 }
 
 /* Button flash overlay */
@@ -454,10 +563,12 @@
 /* ==========================================
    CHOICE BUTTONS
    ========================================== */
+/* Choices are now inside the card — stretch to full card width */
 .flash-demo__choices {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  align-self: stretch;
+  margin-bottom: 0;
 }
 
 .flash-demo__choice {
@@ -546,6 +657,31 @@
 .flash-demo__controls {
   display: flex;
   justify-content: center;
+}
+
+/* Restart button outside phone frame */
+.flash-demo__controls-outside {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+/* Restart button on light background (outside phone) */
+.flash-demo__controls-outside .flash-demo__btn {
+  color: #141414;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.flash-demo__controls-outside .flash-demo__btn:hover {
+  border-color: rgba(0, 0, 0, 0.22);
+  background: rgba(98, 0, 238, 0.04);
+}
+
+.flash-demo__controls-outside .flash-demo__btn:focus-visible {
+  outline: 3px solid rgba(98, 0, 238, 0.28);
+  outline-offset: 2px;
 }
 
 .flash-demo__btn {

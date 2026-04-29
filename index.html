@@ -3,149 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash - Master Vocabulary Faster</title>
-    <meta name="description" content="Flash is a gamified vocabulary learning app that helps you master new words through interactive, swipe-based gameplay.">
+    <!-- CHANGED: Title and description updated — outcome-first, not mechanic-first -->
+    <title>Flash – Learn Vocabulary Faster</title>
+    <meta name="description" content="Flash is a mobile language-learning app that helps you acquire vocabulary and sentence patterns through short, adaptive, game-like practice. Android closed beta.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="demo.css">
-    <!-- Using system fonts - no external dependencies -->
+    <!-- System fonts — no external dependencies -->
 </head>
 <body>
     <header class="navbar">
         <div class="container">
             <div class="logo">
-                <img src="assets/mascot.svg" alt="Flash Logo" width="50" height="50">
+                <!-- PATH FIX: was flash-logo.svg (missing file). Correct asset is mascot.svg.
+                     Relative path — no leading slash — GitHub Pages /flash/ subpath safe. -->
+                <img src="assets/mascot.svg" alt="Flash" width="44" height="44">
                 <span class="logo-text">Flash</span>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#flash-demo">Try Demo</a></li>
+                    <li><a href="#why-flash">Why Flash</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#flash-demo">Demo</a></li>
                     <li><a href="#beta" class="cta-button">Join Beta</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Master Vocabulary with Flash</h1>
-                <p class="hero-tagline">The swipe-based learning app that makes expanding your vocabulary fun, competitive, and effective.</p>
+                <h1>Build language skills through short, adaptive practice.</h1>
+                <p class="hero-tagline">Flash is a mobile app that builds vocabulary and sentence recognition through short, adaptive sessions — so you actually retain what you practice.</p>
                 <div class="hero-cta">
-                    <a href="#flash-demo" class="btn btn-primary">Try the Demo</a>
-                    <a href="#beta" class="btn btn-secondary">Join the Beta</a>
+                    <a href="https://forms.gle/qtBEGd45SPo5zAmv9" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Join the Beta</a>
+                    <a href="#flash-demo" class="btn btn-secondary">Try the Demo</a>
                 </div>
+                <p class="hero-note">Android closed beta · Limited spots</p>
             </div>
             <div class="hero-visual">
-                <img src="assets/mascot.svg" alt="Flash Mascot" class="hero-mascot">
+                <!-- HomeScreen screenshot — real product visual inserted here -->
+                <!-- PATH NOTE: relative path, no leading slash — GitHub Pages /flash/ subpath safe -->
+                <img
+                    class="hero-screenshot"
+                    src="assets/Screenshot_20260422_172936.png"
+                    alt="Flash app home screen — level progress, XP stats, and Play button"
+                    width="260"
+                    loading="lazy"
+                >
             </div>
         </div>
     </section>
-
-    <section class="about" id="about">
+    <section class="why-flash" id="why-flash">
         <div class="container">
-            <div class="about-card">
-                <div class="about-card__left">
-                    <h2 class="about-card__title">Eray Korkmaz</h2>
-                    <p class="about-card__summary">
-                        I build and market learning products. I shipped an Android beta of Flash and created the positioning, onboarding copy, and closed-beta funnel.
-                    </p>
-                    
-                    <div class="about-card__section">
-                        <span class="about-card__label">Highlights</span>
-                        <ul class="about-card__list">
-                            <li><strong>Messaging & positioning</strong> — clear value prop + onboarding copy</li>
-                            <li><strong>Engagement loops</strong> — streak/progress/review mechanics + iteration from feedback</li>
-                            <li><strong>Go-to-market assets</strong> — landing pages, store listing drafts, visuals</li>
-                        </ul>
-                    </div>
+            <h2>Why Flash</h2>
+            <p class="section-intro">Traditional study methods — word lists, flashcard apps, grammar drills — demand too much time and produce too little engagement. Most learners stop before real retention happens.</p>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">⚡</div>
+                    <h3>Lower friction</h3>
+                    <p>Sessions are short and immediate. No setup, no long lessons to load. You practice in minutes, not hours.</p>
                 </div>
-                
-                <div class="about-card__right">
-                    <div class="about-card__section">
-                        <span class="about-card__label">Background</span>
-                        <ul class="about-card__list about-card__list--compact">
-                            <li>Istanbul Medipol University — English Language Teaching (Graduated 08/2025)</li>
-                            <li>USA Hospitality (Jun 2022–Aug 2024) — customer ops + cash closing</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="about-card__section">
-                        <span class="about-card__label">Links</span>
-                        <div class="about-card__links">
-                            <a href="mailto:eraykorkmaz09@gmail.com" class="about-card__link">eraykorkmaz09@gmail.com</a>
-                            <a href="https://github.com/Dark-Matter3" target="_blank" rel="noopener" class="about-card__link">GitHub</a>
-                        </div>
-                    </div>
+                <div class="why-card">
+                    <div class="why-icon">🔁</div>
+                    <h3>Built-in repetition</h3>
+                    <p>Adaptive review targets the words you need most. Progress does not rely on discipline alone — the system guides the loop.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🎯</div>
+                    <h3>Outcome-focused</h3>
+                    <p>Flash is built around vocabulary acquisition and sentence pattern recognition — the two things that move real language ability forward.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="features" id="features">
+    <section class="how-it-works" id="how-it-works">
         <div class="container">
-            <h2>Features That Make Learning Stick</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">👆</div>
-                    <h3>Swipe-Based Learning</h3>
-                    <p>Learn new words with intuitive swipe gestures that make vocabulary practice feel like a game.</p>
+            <h2>How It Works</h2>
+            <div class="steps steps--grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Start a session</h3>
+                    <p>Train in short, focused bursts.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Competitive Mode</h3>
-                    <p>Challenge friends or compete globally on leaderboards to stay motivated on your language journey.</p>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Answer and build streak</h3>
+                    <p>Fast responses turn into momentum.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Smart Progress Tracking</h3>
-                    <p>Adaptive learning algorithms focus on the words you need the most help with.</p>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Review adapts to you</h3>
+                    <p>Hard words return. Mastered words fade.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Compete if you want</h3>
+                    <p>Leaderboards are optional, not required.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Flash Mini Demo Widget -->
-    <section class="demo-section" id="flash-demo" aria-labelledby="demo-title">
+    <section class="status" id="status">
         <div class="container">
-            <div class="demo-layout">
-                <div class="demo-copy">
-                    <h2 class="demo-copy__title">Try Flash</h2>
-                    <p class="demo-copy__subtitle">Swipe left or right to answer. Keep your streak alive — quick, game-like practice.</p>
-                    
-                    <ul class="demo-copy__features">
-                        <li><strong>Swipe-based learning</strong> — fast decisions, low friction</li>
-                        <li><strong>Streak + progress feedback</strong> — real game feel</li>
-                        <li><strong>Android closed beta</strong> — invites selected in batches</li>
-                    </ul>
-                    
-                    <p class="demo-copy__tip">Tip: Use <kbd>←</kbd> <kbd>→</kbd> arrow keys on desktop</p>
-                    
-                    <a href="#beta" class="btn btn-primary demo-copy__cta">Join the Beta</a>
+            <h2>Current Status</h2>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-icon">📱</div>
+                    <h3>Android closed beta</h3>
+                    <p>Live and being tested on Android.</p>
                 </div>
-                
-                <div class="demo-phone" id="demo-phone-container">
-                    <!-- Content dynamically generated by demo.js -->
+                <div class="status-item">
+                    <div class="status-icon">🌍</div>
+                    <h3>Multilingual support</h3>
+                    <p>English live. Spanish expansion next.</p>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon">🔧</div>
+                    <h3>Actively developed</h3>
+                    <p>Core systems are working and improving.</p>
                 </div>
             </div>
         </div>
-        <noscript>
-            <div class="container" style="text-align: center; padding: 3rem;">
-                <p>JavaScript is required to play the Flash Mini Demo.</p>
-            </div>
-        </noscript>
     </section>
-
+    <section class="demo-section" id="demo-section">
+        <section class="flash-demo" id="flash-demo" aria-labelledby="demo-title">
+            <!-- Content dynamically generated by demo.js -->
+            <noscript>
+                <div class="container" style="text-align: center; padding: 3rem;">
+                    <p>JavaScript is required to play the Flash Mini Demo.</p>
+                </div>
+            </noscript>
+        </section>
+    </section>
     <section class="beta" id="beta">
         <div class="container">
             <div class="beta-content">
-                <span class="beta-badge">🧪 Closed Beta</span>
-                <h2>Join the Android Beta</h2>
+                <span class="beta-badge">🧪 Android Closed Beta</span>
+                <h2>Join the Beta</h2>
                 <p class="beta-description">
-                    Flash is in closed beta. We're selecting testers based on device diversity to catch the most bugs across different Android devices.
+                    Flash is in closed beta on Android. If you want early access, want to help shape the product, and are willing to give honest feedback — apply below.
                 </p>
-
                 <div class="beta-details">
                     <div class="beta-detail">
                         <span class="beta-detail-icon">📱</span>
@@ -157,69 +154,109 @@
                     </div>
                     <div class="beta-detail">
                         <span class="beta-detail-icon">✉️</span>
-                        <span>Selected in batches</span>
+                        <span>Invite via email</span>
                     </div>
                 </div>
-
                 <a href="https://forms.gle/qtBEGd45SPo5zAmv9" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-                    Request Android Beta Access
+                    Request Beta Access
                 </a>
                 <p class="beta-microcopy">
-                    Closed beta · Android only · Limited spots, selected in batches
+                    We select testers in batches. If chosen, you'll receive a Google Play invite link to the email you applied with.
                 </p>
-
-                <div class="beta-expectations">
-                    <h4>What to expect</h4>
-                    <ul>
-                        <li>✅ You'll join the waitlist</li>
-                        <li>✅ We select testers based on device diversity</li>
-                        <li>✅ If chosen, you'll receive an email invite via Firebase</li>
-                        <li>✅ Accept the invite with the same email you applied with</li>
+            </div>
+        </div>
+    </section>
+    <section class="founder" id="founder">
+        <div class="container">
+            <div class="founder-content">
+                <h2>About</h2>
+                <p>Flash is built by <strong>Eray Korkmaz</strong>, a solo founder and developer. The product is in Android closed beta and preparing for broader growth in Spanish-speaking markets.</p>
+                <p>Questions or partnership interest: <a href="mailto:cortexdigitaltech@gmail.com">cortexdigitaltech@gmail.com</a></p>
+            </div>
+        </div>
+    </section>
+    <section class="account-deletion" id="account-deletion">
+        <div class="container">
+            <h2>Account Deletion</h2>
+            <div class="deletion-card">
+                <div class="deletion-card__section">
+                    <h3 class="deletion-card__subtitle">How to Delete Your Account</h3>
+                    <ol class="deletion-card__steps">
+                        <li>Open the <strong>Flash</strong> app on your device</li>
+                        <li>Navigate to <strong>Settings</strong></li>
+                        <li>Scroll to the bottom to find <strong>Danger Zone</strong></li>
+                        <li>Tap <strong>Delete Account</strong></li>
+                        <li>Confirm the deletion when prompted</li>
+                    </ol>
+                    <p class="deletion-card__note">
+                        ⚠️ <strong>Note:</strong> Account deletion is permanent and cannot be undone.
+                    </p>
+                </div>
+                <div class="deletion-card__section">
+                    <h3 class="deletion-card__subtitle">What Data Is Deleted</h3>
+                    <ul class="deletion-card__list">
+                        <li><strong>Firebase Authentication account</strong> — Your login credentials and authentication data</li>
+                        <li><strong>User profile information</strong> — Name, email, profile settings</li>
+                        <li><strong>Gameplay statistics</strong> — XP, levels, streaks, match history</li>
+                        <li><strong>Vocabulary progress</strong> — Word unlock state, learning progress</li>
+                        <li><strong>Collections and achievements</strong> — Custom word lists, badges</li>
+                        <li><strong>App preferences</strong> — Settings, notification preferences</li>
+                        <li><strong>Local caches</strong> — All app data stored on your device</li>
                     </ul>
                 </div>
+                <div class="deletion-card__section">
+                    <h3 class="deletion-card__subtitle">What Data May Be Retained</h3>
+                    <ul class="deletion-card__list deletion-card__list--secondary">
+                        <li><strong>Purchase records</strong> — Transaction history may be retained for up to 7 years as required by Google Play for legal, tax, and financial compliance</li>
+                        <li><strong>Aggregated analytics</strong> — Anonymous, non-identifiable usage data may be retained for product improvement</li>
+                        <li><strong>Support logs</strong> — If you contacted support, tickets may be retained for quality assurance purposes</li>
+                    </ul>
+                    <p class="deletion-card__legal">
+                        Retained data contains no personally identifiable information and cannot be linked back to you.
+                    </p>
+                </div>
+                <div class="deletion-card__section deletion-card__section--support">
+                    <h3 class="deletion-card__subtitle">Need Help?</h3>
+                    <p class="deletion-card__support-text">
+                        If you cannot access the app to delete your account, contact us at:
+                    </p>
+                    <a href="mailto:cortexdigitaltech@gmail.com?subject=Flash%20Account%20Deletion%20Request" class="deletion-card__support-link">
+                        📧 cortexdigitaltech@gmail.com
+                    </a>
+                    <p class="deletion-card__support-note">
+                        Include the email associated with your account and mention "Account Deletion Request" in the subject line.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
-
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Get in Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h3>📬 Contact</h3>
-                    <p>Questions or feedback?</p>
-                    <a href="mailto:eraykorkmaz09@gmail.com" class="btn btn-outline">Email Us</a>
-                </div>
-                <div class="contact-card">
-                    <h3>💼 Collaboration</h3>
-                    <p>Work opportunities?</p>
-                    <a href="mailto:eraykorkmaz09@gmail.com" class="btn btn-outline">Get in Touch</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/mascot.svg" alt="Flash" width="40" height="40">
+                    <!-- PATH FIX: was flash-logo.svg. Correct asset is mascot.svg. -->
+                    <img src="assets/mascot.svg" alt="Flash" width="32" height="32">
                     <span>Flash</span>
                 </div>
                 <div class="footer-links">
-                    <a href="#features">Features</a>
+                    <a href="#why-flash">Why Flash</a>
+                    <a href="#how-it-works">How It Works</a>
                     <a href="#flash-demo">Demo</a>
                     <a href="#beta">Join Beta</a>
-                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="#account-deletion">Account Deletion</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Flash App. All rights reserved.</p>
-                <p class="build-stamp">Build: 2026-01-06 | landing-dist</p>
+                <p>&copy; 2026 Flash. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="demo.js"></script>
+    <script src="script.js"></script>
+    <script defer src="demo.js"></script>
 </body>
 </html>
