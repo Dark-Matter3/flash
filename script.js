@@ -4,7 +4,19 @@
 // ADDED: Waitlist modal — open/close, validation, Firebase Firestore submit handler.
 
 // Firebase Web SDK init — public client config, safe to commit.
-// Security is enforced by Firestore security rules, not this key.
+//
+// SECURITY NOTE — Firebase Browser API key:
+// This is the Firebase Browser key (appId: web:907269c6aaba5a729c82b8).
+// It is NOT the Android key and NOT a service account secret.
+// Firebase Web config is intentionally public — the key alone grants no
+// privileged access. Security is enforced at two layers:
+//   1. Google Cloud Console → API Keys → Browser key must be restricted
+//      to HTTP referrers: your domain(s) only (e.g. dark-matter3.github.io/flash/*)
+//   2. Firestore Security Rules — waitlistLeads only allows create with
+//      validated fields. All reads/updates/deletes are blocked.
+// GitHub secret scanning alert: resolve as "used in client-side code" /
+// "false positive" after confirming the Browser key has HTTP referrer
+// restrictions applied in Google Cloud Console.
 (function initFirebase() {
   if (typeof firebase === 'undefined') return;
   if (firebase.apps && firebase.apps.length) return;
