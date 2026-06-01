@@ -122,6 +122,24 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!modal) return;
     modal.hidden = true;
     document.body.style.overflow = '';
+    resetForm();
+  }
+
+  /**
+   * Reset the form to its initial state.
+   * Called on close and can be called after a successful submit if needed.
+   */
+  function resetForm() {
+    if (form) form.reset();
+    clearError();
+    hideSubmitError();
+    if (successMsg) successMsg.hidden = true;
+    var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+    if (submitBtn) {
+      submitBtn.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Join the waitlist';
+    }
   }
 
   // Open triggers (hero + beta section buttons)
@@ -250,7 +268,10 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(function () {
           logEvent('waitlist_lead_submitted', { role: lead.role, interest: lead.interest });
-          if (submitBtn) submitBtn.hidden = true;
+          if (submitBtn) {
+            submitBtn.textContent = 'Join the waitlist'; // reset text before hiding
+            submitBtn.hidden = true;
+          }
           if (successMsg) successMsg.hidden = false;
         })
         .catch(function () {
