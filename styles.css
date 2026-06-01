@@ -1157,3 +1157,310 @@ footer {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.4rem;
 }
+
+.footer-links a:hover { color: #fff; }
+
+.footer-legal {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.footer-legal a {
+    color: var(--text-tertiary);
+    font-size: 1.3rem;
+}
+
+.footer-legal a:hover { color: #fff; }
+
+.footer-bottom {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-tertiary);
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 900px) {
+    h1 { font-size: 3.2rem; }
+
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-tagline {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-cta {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        order: -1;
+    }
+
+    .hero-screenshot {
+        width: 220px;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        height: auto;
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-links,
+    .footer-legal {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    html { font-size: 55%; }
+
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.4rem; }
+
+    .hero {
+        padding-top: 12rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar nav ul {
+        gap: var(--spacing-xs);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .deletion-card {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* ========================
+   WAITLIST MODAL
+   ======================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--spacing-lg);
+    backdrop-filter: blur(2px);
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-dialog {
+    background-color: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+
+.modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    font-size: 2.4rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+    background-color: var(--surface);
+}
+
+.modal-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    text-align: left;
+}
+
+.modal-subtitle {
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+}
+
+.field-required {
+    color: #e53935;
+}
+
+.field-optional {
+    font-weight: 400;
+    color: var(--text-tertiary);
+    font-size: 1.2rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 1rem var(--spacing-md);
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background-color: var(--surface);
+    border: 1.5px solid var(--card-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-group input[type="email"]:focus,
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(98, 0, 238, 0.12);
+}
+
+.form-group input.input-error,
+.form-group select.input-error {
+    border-color: #e53935;
+}
+
+.field-error {
+    display: block;
+    font-size: 1.2rem;
+    color: #e53935;
+    margin-top: 0.4rem;
+    min-height: 1.6rem;
+}
+
+.consent-text {
+    font-size: 1.2rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.form-success {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: rgba(3, 218, 198, 0.12);
+    border: 1.5px solid var(--secondary);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-success[hidden] {
+    display: none;
+}
+
+.form-submit-error {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: rgba(229, 57, 53, 0.08);
+    border: 1.5px solid #e53935;
+    border-radius: var(--radius-md);
+    font-size: 1.4rem;
+    color: #e53935;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.form-submit-error[hidden] {
+    display: none;
+}
+
+/* Disabled submit button — loading state */
+#waitlist-form button[type="submit"]:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.modal-fallback {
+    margin-top: var(--spacing-md);
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--text-tertiary);
+}
+
+.modal-fallback a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Beta section fallback link — sits on purple gradient, must be white */
+.beta-fallback {
+    margin-top: var(--spacing-sm);
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+}
+
+.beta-fallback a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+    .modal-dialog {
+        padding: var(--spacing-lg);
+    }
+}

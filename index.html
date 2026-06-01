@@ -35,7 +35,7 @@
                 <h1>Build language skills through short, adaptive practice.</h1>
                 <p class="hero-tagline">Flash is a mobile app that builds vocabulary and sentence recognition through short, adaptive sessions — so you actually retain what you practice.</p>
                 <div class="hero-cta">
-                    <a href="https://forms.gle/qtBEGd45SPo5zAmv9" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Join the Beta</a>
+                    <button type="button" class="btn btn-primary btn-lg" id="hero-waitlist-btn">Get early access</button>
                     <a href="#flash-demo" class="btn btn-secondary">Try the Demo</a>
                 </div>
                 <p class="hero-note">Android closed beta · Limited spots</p>
@@ -157,9 +157,8 @@
                         <span>Invite via email</span>
                     </div>
                 </div>
-                <a href="https://forms.gle/qtBEGd45SPo5zAmv9" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-                    Request Beta Access
-                </a>
+                <button type="button" class="btn btn-primary btn-lg" id="beta-waitlist-btn">Join the Flash waitlist</button>
+                <p class="beta-fallback">Or <a href="https://forms.gle/qtBEGd45SPo5zAmv9" target="_blank" rel="noopener">apply via Google Forms</a> instead.</p>
                 <p class="beta-microcopy">
                     We select testers in batches. If chosen, you'll receive a Google Play invite link to the email you applied with.
                 </p>
@@ -256,6 +255,67 @@
         </div>
     </footer>
 
+    <!-- WAITLIST MODAL -->
+    <div id="waitlist-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="wl-modal-title" hidden>
+        <div class="modal-dialog">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            <h2 id="wl-modal-title" class="modal-title">Get early access</h2>
+            <p class="modal-subtitle">Join the Flash waitlist — closed beta, product updates, or B2B/teacher pilots.</p>
+
+            <form id="waitlist-form" novalidate>
+                <div class="form-group">
+                    <label for="wl-email">Email address <span class="field-required">*</span></label>
+                    <input type="email" id="wl-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                    <span class="field-error" id="wl-email-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="wl-name">Name <span class="field-optional">(optional)</span></label>
+                    <input type="text" id="wl-name" name="name" placeholder="Your name" autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="wl-role">Role <span class="field-optional">(optional)</span></label>
+                    <select id="wl-role" name="role">
+                        <option value="">Select a role&hellip;</option>
+                        <option value="learner">Learner</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="school">School / Institution</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="wl-interest">Interest <span class="field-optional">(optional)</span></label>
+                    <select id="wl-interest" name="interest">
+                        <option value="">Select an interest&hellip;</option>
+                        <option value="closed_beta">Closed beta</option>
+                        <option value="product_updates">Product updates</option>
+                        <option value="teacher_pilot">Teacher / classroom pilot</option>
+                        <option value="b2b_partnership">B2B partnership</option>
+                    </select>
+                </div>
+
+                <p class="consent-text">By submitting, you agree to receive updates about Flash. You can unsubscribe anytime.</p>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Join the waitlist</button>
+
+                <div class="form-success" id="wl-success" hidden>
+                    <p>&#10003;&nbsp; You&rsquo;re on the list! We&rsquo;ll be in touch.</p>
+                </div>
+
+                <div class="form-submit-error" id="wl-submit-error" hidden></div>
+            </form>
+
+            <p class="modal-fallback">Prefer a form? <a href="https://forms.gle/qtBEGd45SPo5zAmv9" target="_blank" rel="noopener">Apply via Google Forms</a>.</p>
+        </div>
+    </div>
+    <!-- END WAITLIST MODAL -->
+
+    <!-- Firebase Web SDK (compat) — public client config, no secrets -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
     <script src="script.js"></script>
     <script defer src="demo.js"></script>
 </body>
