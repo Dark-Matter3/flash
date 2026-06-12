@@ -8,15 +8,20 @@
     <meta name="description" content="Flash is a mobile language-learning app that helps you acquire vocabulary and sentence patterns through short, adaptive, game-like practice. Android closed beta.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="demo.css">
-    <!-- System fonts — no external dependencies -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- ============================================================
+         NAV
+         CHANGED: Removed Download/Metrics links. Added Why Flash,
+         How It Works. Primary CTA is now Join Beta, not Download.
+         ============================================================ -->
     <header class="navbar">
         <div class="container">
             <div class="logo">
-                <!-- PATH FIX: was flash-logo.svg (missing file). Correct asset is mascot.svg.
-                     Relative path — no leading slash — GitHub Pages /flash/ subpath safe. -->
-                <img src="assets/mascot.svg" alt="Flash" width="44" height="44">
                 <span class="logo-text">Flash</span>
             </div>
             <nav>
@@ -29,16 +34,25 @@
             </nav>
         </div>
     </header>
+
+    <!-- ============================================================
+         HERO
+         CHANGED: Headline is now outcome-first ("learn vocabulary
+         faster"), not mechanic-first ("swipe-based app").
+         Primary CTA = Join Beta. Secondary CTA = Try the in-page demo widget.
+         Removed app store badges — not publicly available yet.
+         Screenshot placeholder added with comment for future asset.
+         ============================================================ -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>Build language skills through short, adaptive practice.</h1>
-                <p class="hero-tagline">Flash is a mobile app that builds vocabulary and sentence recognition through short, adaptive sessions — so you actually retain what you practice.</p>
+                <p class="hero-tagline">Flash is a mobile language-learning app that helps you acquire vocabulary and sentence patterns through short, adaptive sessions — so you retain what you practice.</p>
                 <div class="hero-cta">
-                    <button type="button" class="btn btn-primary btn-lg" id="hero-waitlist-btn">Get early access</button>
-                    <a href="#flash-demo" class="btn btn-secondary">Try the Demo</a>
+                    <button type="button" class="btn btn-primary btn-lg" id="hero-waitlist-btn">Join Android Beta</button>
+                    <a href="#flash-demo" class="btn btn-secondary">Try Demo</a>
                 </div>
-                <p class="hero-note">Android closed beta · Limited spots</p>
+                <p class="hero-note">Join the Android closed beta · Limited tester spots</p>
             </div>
             <div class="hero-visual">
                 <!-- HomeScreen screenshot — real product visual inserted here -->
@@ -53,6 +67,39 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         BETA PROOF STRIP
+         Quick status indicators showing core product features
+         ============================================================ -->
+    <section class="beta-proof">
+        <div class="container">
+            <div class="proof-items">
+                <div class="proof-item">
+                    <span class="proof-icon">📱</span>
+                    <span class="proof-text">Android Beta</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-icon">🌍</span>
+                    <span class="proof-text">English + Spanish</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-icon">🔄</span>
+                    <span class="proof-text">Adaptive Review</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-icon">📈</span>
+                    <span class="proof-text">Progress Tracking</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         WHY FLASH
+         NEW SECTION: Explains the problem with traditional vocab
+         study. Positions Flash on outcome, not gesture mechanic.
+         ============================================================ -->
     <section class="why-flash" id="why-flash">
         <div class="container">
             <h2>Why Flash</h2>
@@ -76,6 +123,12 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         HOW IT WORKS
+         NEW SECTION: Explains the core loop in four steps.
+         Swipe is mentioned as one detail, not the main identity.
+         ============================================================ -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
             <h2>How It Works</h2>
@@ -103,6 +156,13 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         CURRENT STATUS / PROOF
+         NEW SECTION: Replaces the fake metrics block (code coverage,
+         performance scores) with honest product status. No invented
+         numbers. Only real, confirmed facts about the current stage.
+         ============================================================ -->
     <section class="status" id="status">
         <div class="container">
             <h2>Current Status</h2>
@@ -115,16 +175,21 @@
                 <div class="status-item">
                     <div class="status-icon">🌍</div>
                     <h3>Multilingual support</h3>
-                    <p>English live. Spanish expansion next.</p>
+                    <p>English and Spanish available. More languages planned.</p>
                 </div>
                 <div class="status-item">
                     <div class="status-icon">🔧</div>
                     <h3>Actively developed</h3>
-                    <p>Core systems are working and improving.</p>
+                    <p>Core learning, review, streak, and progress systems are live and improving.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         DEMO WIDGET
+         UNCHANGED: Interactive mini demo rendered by demo.js.
+         ============================================================ -->
     <section class="demo-section" id="demo-section">
         <section class="flash-demo" id="flash-demo" aria-labelledby="demo-title">
             <!-- Content dynamically generated by demo.js -->
@@ -135,6 +200,13 @@
             </noscript>
         </section>
     </section>
+
+    <!-- ============================================================
+         BETA CTA BLOCK
+         CHANGED: Copy now leads with value ("try it early, help
+         shape the product") instead of logistics ("device diversity,
+         invite batches"). Logistics moved to secondary microcopy.
+         ============================================================ -->
     <section class="beta" id="beta">
         <div class="container">
             <div class="beta-content">
@@ -165,6 +237,13 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         FOUNDER
+         CHANGED: Moved to bottom of page. One short paragraph.
+         Removed résumé language (availability, student schedule).
+         Framed as founder credibility, not personal profile.
+         ============================================================ -->
     <section class="founder" id="founder">
         <div class="container">
             <div class="founder-content">
@@ -174,6 +253,13 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         ACCOUNT DELETION
+         KEPT: Required for Google Play Store policy compliance.
+         Moved below founder section so it does not interrupt the
+         core product narrative. Linked from footer for direct access.
+         ============================================================ -->
     <section class="account-deletion" id="account-deletion">
         <div class="container">
             <h2>Account Deletion</h2>
@@ -229,12 +315,16 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         FOOTER
+         CHANGED: Simplified. Removed fake company links (About Us,
+         Careers). Added account deletion anchor link for compliance.
+         ============================================================ -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <!-- PATH FIX: was flash-logo.svg. Correct asset is mascot.svg. -->
-                    <img src="assets/mascot.svg" alt="Flash" width="32" height="32">
                     <span>Flash</span>
                 </div>
                 <div class="footer-links">
@@ -259,7 +349,7 @@
     <div id="waitlist-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="wl-modal-title" hidden>
         <div class="modal-dialog">
             <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
-            <h2 id="wl-modal-title" class="modal-title">Get early access</h2>
+            <h2 id="wl-modal-title" class="modal-title">Join the Android Beta</h2>
             <p class="modal-subtitle">Join the Flash waitlist — closed beta, product updates, or B2B/teacher pilots.</p>
 
             <form id="waitlist-form" novalidate>

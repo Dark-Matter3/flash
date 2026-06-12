@@ -141,20 +141,15 @@
 
   // ==========================================
   // GAME STATE
-  // Demo mode: local-only, no progression writes.
-  // Hearts system replaces score/streak.
   // ==========================================
-  const DEMO_MAX_HEARTS = 3;
-
   let state = {
     currentIndex: 0,
-    hearts: DEMO_MAX_HEARTS,
-    answered: 0,
-    correct: 0,
-    wrong: 0,
-    isAnswered: false,
+    score: 0,
+    streak: 0,
+    highStreak: 0,
+    answered: false,
     questionOrder: [],
-    demoEnded: false,
+    missedQuestions: [],
   };
 
   // Swipe state
@@ -200,7 +195,6 @@
     cacheElements();
     bindEvents();
     resetGame();
-    // Demo is local-only: no Firebase, no XP, no streak, no progression writes.
   }
 
   function buildDemoHTML() {
@@ -209,9 +203,16 @@
         <div class="phone-frame">
           <div class="phone-notch"></div>
           <div class="phone-screen" id="phone-screen">
-            <!-- Hearts Bar (demo-only, no real progression) -->
-            <div class="flash-demo__hearts-bar">
-              <div class="flash-demo__hearts" id="demo-hearts" aria-label="Hearts remaining"></div>
+            <!-- Stats Bar -->
+            <div class="flash-demo__stats">
+              <div class="flash-demo__stat">
+                <span class="flash-demo__stat-label">Score</span>
+                <span class="flash-demo__stat-value" id="demo-score">0</span>
+              </div>
+              <div class="flash-demo__stat flash-demo__stat--streak">
+                <span class="flash-demo__stat-label">🔥 Streak</span>
+                <span class="flash-demo__stat-value" id="demo-streak">0</span>
+              </div>
               <div class="flash-demo__stat">
                 <span class="flash-demo__stat-label">Progress</span>
                 <span class="flash-demo__stat-value" id="demo-progress">1/12</span>
@@ -287,7 +288,8 @@
       choiceRightText: document.getElementById('choice-right-text'),
       hintLeft: document.getElementById('hint-left'),
       hintRight: document.getElementById('hint-right'),
-      hearts: document.getElementById('demo-hearts'),
+      score: document.getElementById('demo-score'),
+      streak: document.getElementById('demo-streak'),
       progress: document.getElementById('demo-progress'),
       progressFill: document.getElementById('demo-progress-fill'),
       restartBtn: document.getElementById('demo-restart'),
@@ -324,7 +326,7 @@
   // DRAG/SWIPE HANDLING
   // ==========================================
   function onDragStart(e) {
-    if (state.isAnswered || state.demoEnded) return;
+    if (state.answered) return;
 
     swipe.isDragging = true;
     swipe.startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
@@ -335,7 +337,7 @@
   }
 
   function onDragMove(e) {
-    if (!swipe.isDragging || state.isAnswered) return;
+    if (!swipe.isDragging || state.answered) return;
 
     swipe.currentX = e.type.includes('touch')
       ? e.touches[0].clientX
@@ -377,7 +379,7 @@
     elements.hintLeft.classList.remove('flash-demo__swipe-hint--active');
     elements.hintRight.classList.remove('flash-demo__swipe-hint--active');
 
-    if (state.isAnswered) {
+    if (state.answered) {
       elements.card.style.transform = '';
       elements.card.style.transition = '';
       return;
@@ -400,18 +402,13 @@
   function resetGame() {
     state = {
       currentIndex: 0,
-      hearts: DEMO_MAX_HEARTS,
-      answered: 0,
-      correct: 0,
-      wrong: 0,
-      isAnswered: false,
+      score: 0,
+      streak: 0,
+      highStreak: 0,
+      answered: false,
       questionOrder: shuffleArray([...QUESTIONS]),
-      demoEnded: false,
+      missedQuestions: [],
     };
-
-    // Restore choice buttons if hidden from previous run
-    if (elements.choiceLeft) elements.choiceLeft.style.visibility = '';
-    if (elements.choiceRight) elements.choiceRight.style.visibility = '';
 
     updateStats();
     renderQuestion();
@@ -438,7 +435,7 @@
     elements.card.style.transform = '';
     elements.card.style.transition = '';
     elements.cardFeedback.classList.remove(
-      'flash-demo__card-feedback--visible',
+      'flash-demo__card-feedback--visible'
     );
 
     // Update content
@@ -455,7 +452,7 @@
     elements.choiceRight.className =
       'flash-demo__choice flash-demo__choice--right';
 
-    state.isAnswered = false;
+    state.answered = false;
 
     // Animate card in
     elements.card.classList.add('flash-demo__card--enter');
@@ -466,16 +463,14 @@
     announce(
       `Question ${state.currentIndex + 1}. ${question.type}. ${
         question.prompt
-      }. Left: ${question.leftOption}. Right: ${question.rightOption}.`,
+      }. Left: ${question.leftOption}. Right: ${question.rightOption}.`
     );
   }
 
   function handleAnswer(side) {
-    // Demo mode: local-only. No XP, coins, streak, mastery, or Firebase writes.
-    if (state.isAnswered || state.demoEnded) return;
+    if (state.answered) return;
 
-    state.isAnswered = true;
-    state.answered++;
+    state.answered = true;
 
     const question = getCurrentQuestion();
     const isCorrect = side === question.correctSide;
@@ -487,20 +482,32 @@
     elements.phoneScreen.classList.add(flashClass);
     selectedBtn.classList.add(flashClass);
 
+    // Remove flash classes after animation completes
     setTimeout(() => {
       elements.phoneScreen.classList.remove(flashClass);
       selectedBtn.classList.remove(flashClass);
     }, 250);
 
-    // Update local demo stats only
+    // Update stats
     if (isCorrect) {
-      state.correct++;
+      state.score++;
+      state.streak++;
+      if (state.streak > state.highStreak) {
+        state.highStreak = state.streak;
+      }
     } else {
-      // Wrong answer: lose 1 heart. No reinsertion — demo keeps moving.
-      state.wrong++;
-      state.hearts = Math.max(state.hearts - 1, 0);
-      if (state.hearts === 0) {
-        state.demoEnded = true;
+      state.streak = 0;
+      // Micro-spaced repetition: reinsert wrong question
+      if (!state.missedQuestions.includes(question.id)) {
+        state.missedQuestions.push(question.id);
+        const reinsertIndex = Math.min(
+          state.currentIndex + 3,
+          getTotalQuestions()
+        );
+        state.questionOrder.splice(reinsertIndex, 0, {
+          ...question,
+          id: question.id + '_retry',
+        });
       }
     }
 
@@ -527,18 +534,17 @@
         elements.choiceLeft.classList.add('flash-demo__choice--wrong');
     }
 
+    // Disable buttons
     elements.choiceLeft.disabled = true;
     elements.choiceRight.disabled = true;
 
+    // Announce result
     announce(isCorrect ? 'Correct!' : `Incorrect. ${question.explanation}`);
 
+    // Auto-advance after delay
     setTimeout(() => {
-      elements.card.style.opacity = '1';
-      if (state.demoEnded) {
-        renderDemoOver();
-        return;
-      }
       state.currentIndex++;
+      elements.card.style.opacity = '1';
       renderQuestion();
     }, FEEDBACK_DELAY);
   }
@@ -551,85 +557,86 @@
     elements.cardFeedback.classList.add(
       isCorrect
         ? 'flash-demo__card-feedback--correct'
-        : 'flash-demo__card-feedback--wrong',
+        : 'flash-demo__card-feedback--wrong'
     );
   }
 
-  function renderDemoOver() {
-    // Hearts reached 0 — show CTA, not a progress summary.
-    // Demo is intentionally non-persistent: no XP/coins/mastery saved.
-    elements.card.className = 'flash-demo__card flash-demo__card--complete';
-    elements.card.style.transform = '';
-    elements.card.style.opacity = '1';
-    elements.card.innerHTML = `
-      <div class="flash-demo__complete">
-        <div class="flash-demo__complete-emoji">💔</div>
-        <h3 class="flash-demo__complete-title">Out of hearts</h3>
-        <p class="flash-demo__complete-cta">
-          You answered ${state.answered} questions.<br>
-          Continue in Flash to keep learning.
-        </p>
-        <p class="flash-demo__complete-beta">
-          🚀 Get 1000+ questions, real progress tracking &amp; full features.<br>
-          <a href="#contact">Join the beta</a> — it's free.
-        </p>
-      </div>
-    `;
-    elements.choiceLeft.style.visibility = 'hidden';
-    elements.choiceRight.style.visibility = 'hidden';
-    announce(`Out of hearts. You answered ${state.answered} questions.`);
-  }
-
   function renderComplete() {
-    // All questions finished — show CTA, not a score/streak/mastery summary.
-    // Demo is intentionally non-persistent.
+    const percentage = Math.round((state.score / QUESTIONS.length) * 100);
+    const emoji = percentage >= 80 ? '🎉' : percentage >= 50 ? '👍' : '💪';
+
     elements.card.className = 'flash-demo__card flash-demo__card--complete';
     elements.card.style.transform = '';
     elements.card.style.opacity = '1';
     elements.card.innerHTML = `
       <div class="flash-demo__complete">
-        <div class="flash-demo__complete-emoji">🎉</div>
-        <h3 class="flash-demo__complete-title">Nice run!</h3>
+        <div class="flash-demo__complete-emoji">${emoji}</div>
+        <h3 class="flash-demo__complete-title">Demo Complete!</h3>
+        <div class="flash-demo__complete-stats">
+          <div class="flash-demo__complete-stat">
+            <span class="flash-demo__complete-stat-value">${state.score}/${
+      QUESTIONS.length
+    }</span>
+            <span class="flash-demo__complete-stat-label">Score</span>
+          </div>
+          <div class="flash-demo__complete-stat">
+            <span class="flash-demo__complete-stat-value">${
+              state.highStreak
+            }</span>
+            <span class="flash-demo__complete-stat-label">Best Streak</span>
+          </div>
+        </div>
         <p class="flash-demo__complete-cta">
-          You answered ${state.answered} questions.<br>
-          Continue in Flash to save your progress.
+          ${
+            percentage >= 80
+              ? 'Excellent!'
+              : percentage >= 50
+              ? 'Good effort!'
+              : 'Keep practicing!'
+          }
         </p>
         <p class="flash-demo__complete-beta">
-          🚀 Get 1000+ questions, real progress tracking &amp; full features.<br>
-          <a href="#contact">Join the beta</a> — it's free.
+          🧪 This was just a taste!<br>
+          <a href="#contact">Join the closed beta</a> for 1000+ questions & full features.
         </p>
       </div>
     `;
+
+    // Hide choice buttons
     elements.choiceLeft.style.visibility = 'hidden';
     elements.choiceRight.style.visibility = 'hidden';
-    announce(`Demo complete. You answered ${state.answered} questions.`);
+
+    announce(
+      `Demo complete. You scored ${state.score} out of ${QUESTIONS.length}. Best streak: ${state.highStreak}.`
+    );
   }
 
   function updateStats() {
-    // Render hearts: filled ❤️ for remaining, empty ♡ for lost
-    if (elements.hearts) {
-      elements.hearts.innerHTML = Array.from({ length: DEMO_MAX_HEARTS })
-        .map(
-          (_, i) =>
-            `<span class="flash-demo__heart${
-              i < state.hearts ? '' : ' flash-demo__heart--lost'
-            }">${i < state.hearts ? '❤️' : '🖤'}</span>`,
-        )
-        .join('');
-    }
-
+    elements.score.textContent = state.score;
+    elements.streak.textContent = state.streak;
     elements.progress.textContent = `${Math.min(
       state.currentIndex + 1,
-      QUESTIONS.length,
+      QUESTIONS.length
     )}/${QUESTIONS.length}`;
 
     const progressPercent = (state.currentIndex / QUESTIONS.length) * 100;
     elements.progressFill.style.width = `${progressPercent}%`;
+
+    // Streak emphasis animation
+    if (state.streak >= 3) {
+      elements.streak.parentElement.classList.add('flash-demo__stat--hot');
+    } else {
+      elements.streak.parentElement.classList.remove('flash-demo__stat--hot');
+    }
   }
 
   function handleRestart() {
+    // Reset visibility of choice buttons
+    elements.choiceLeft.style.visibility = '';
+    elements.choiceRight.style.visibility = '';
+
     resetGame();
-    announce('Demo restarted. 3 hearts restored.');
+    announce('Demo restarted.');
   }
 
   // ==========================================
@@ -651,13 +658,13 @@
 
     switch (e.key) {
       case 'ArrowLeft':
-        if (!state.isAnswered && !state.demoEnded) {
+        if (!state.answered) {
           e.preventDefault();
           handleAnswer('left');
         }
         break;
       case 'ArrowRight':
-        if (!state.isAnswered && !state.demoEnded) {
+        if (!state.answered) {
           e.preventDefault();
           handleAnswer('right');
         }
