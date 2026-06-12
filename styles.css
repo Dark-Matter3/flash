@@ -365,7 +365,6 @@ img { max-width: 100%; height: auto; }
 .proof-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -375,11 +374,6 @@ img { max-width: 100%; height: auto; }
     border: 1px solid rgba(167, 107, 255, 0.15);
 }
 
-.proof-icon {
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-}
 
 /* ========================
    WHY FLASH
