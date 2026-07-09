@@ -1,7 +1,7 @@
 # Flash Landing Page — Single Source of Truth
 
-**Canonical Location:** `/mnt/linux-data/Flash/flash-pages/` ✅  
-**Last Updated:** 2026-06-28  
+**Canonical Location:** `/home/dark_matter3/linux-data/_deployment/flash-pages/` ✅  
+**Last Updated:** 2026-07-09 (reorganized to _deployment folder)  
 **Status:** Production-ready with Founder Infra Kit integration
 
 ---
@@ -41,28 +41,23 @@ This is the **authoritative, live landing page** for Flash. All edits happen her
 ### For GitHub Pages Live Site
 
 ```bash
-# 1. Edit files in /mnt/linux-data/Flash/flash-pages/
+# 1. Edit files in /home/dark_matter3/linux-data/_deployment/flash-pages/
 # (Make your changes here—this is the source of truth)
 
 # 2. Test locally
-cd /mnt/linux-data/Flash/flash-pages
+cd /home/dark_matter3/linux-data/_deployment/flash-pages
 python3 -m http.server 8000
 
 # 3. Verify in browser
 # Open http://localhost:8000
 # Check: Logger console.log output, Theme toggle works, no errors
 
-# 4. Sync to deployment location (flash-app/landing-dist)
-cp -r /mnt/linux-data/Flash/flash-pages/* /mnt/linux-data/Flash/flash-app/landing-dist/
-
-# 5. Deploy from flash-app repo
-cd /mnt/linux-data/Flash/flash-app
-# Commit and push if using git for deployment
-git add landing-dist/
-git commit -m "Sync landing page from flash-pages canonical source (2026-06-28)"
+# 4. Commit and push
+git add .
+git commit -m "Update landing page"
 git push origin main
 
-# 6. Verify live site
+# 5. Verify live site
 # Open https://dark-matter3.github.io/flash/ in incognito
 # Hard refresh (Cmd+Shift+R or Ctrl+Shift+R)
 # Confirm Logger messages in console, dark mode works
@@ -73,8 +68,10 @@ git push origin main
 ## File Organization
 
 ```
-/mnt/linux-data/Flash/flash-pages/
+/home/dark_matter3/linux-data/_deployment/flash-pages/
 ├── SOURCE_OF_TRUTH.md          ← You are here (canonical definition)
+├── DEPLOYMENT_LOCK.md           ← URL preservation rules
+├── LANDING_UPDATE_SAFETY_PLAN.md ← Safety procedures (on landing-safe-update branch)
 ├── DEPLOY.md                    ← Deployment instructions
 ├── index.html                   ← Main landing page
 ├── privacy.html                 ← Privacy policy

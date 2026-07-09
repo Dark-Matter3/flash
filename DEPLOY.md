@@ -1,79 +1,96 @@
 # Flash Landing Page - Deploy Checklist
 
-## Folder Structure
+## Location & Purpose
+
+**Canonical Source:** `/home/dark_matter3/linux-data/_deployment/flash-pages/`  
+**GitHub Repo:** Dark-Matter3/flash (main branch)  
+**Public URL:** https://dark-matter3.github.io/flash/  
+**Deployment:** Automatic on every push to main (GitHub Pages)
+
+This folder IS the source of truth. No separate deployment step needed.
+
+## File Structure
 
 ```
-landing-dist/
-├── index.html      ✅ Main page with demo widget
-├── styles.css      ✅ Main page styles (no external fonts)
-├── demo.css        ✅ Demo widget styles
-├── demo.js         ✅ Demo widget logic (12 questions)
-└── assets/
-    └── mascot.svg  ✅ Flash mascot logo
+/home/dark_matter3/linux-data/_deployment/flash-pages/
+├── index.html           ✅ Main landing page
+├── script.js            ✅ Page interactions + Logger
+├── styles.css           ✅ Design tokens + dark mode
+├── demo.js              ✅ Demo widget logic
+├── demo.css             ✅ Demo widget styles
+├── js/
+│   ├── logger.js        ✅ Vanilla JS Logger (no deps)
+│   └── theme.js         ✅ Theme Manager
+├── assets/
+│   └── mascot.svg       ✅ Flash mascot logo
+├── DEPLOYMENT_LOCK.md   📋 URL preservation rules
+└── SOURCE_OF_TRUTH.md   📋 This is the source
 ```
 
-**Total Files: 5**
-**Estimated Size: ~50KB**
+**Total Files: ~15**  
+**Total Size: ~150KB**
 
----
-
-## Pre-Deploy Validation
-
-Before deploying, verify locally:
+### Step 1: Navigate to the repository
 
 ```bash
-# Navigate to landing-dist folder
-cd landing-dist
+cd /home/dark_matter3/linux-data/_deployment/flash-pages
+```
 
+### Step 2: Test locally before deploying
+
+```bash
 # Start a local server (pick one)
-python3 -m http.server 8080
+python3 -m http.server 8000
 # OR
 npx serve .
 
 # Open in browser
-open http://localhost:8080
+open http://localhost:8000
 ```
 
-### Checklist:
+### Step 3: Verify deployment is ready
 
-- [ ] Page loads without errors
-- [ ] Mascot logo appears in navbar, hero, and footer
-- [ ] Demo widget loads and displays questions
-- [ ] Keyboard shortcuts work (1-4, Enter, R)
-- [ ] Score/Streak/Progress update correctly
-- [ ] Mobile responsive (test at 375px width)
-- [ ] Build stamp visible in footer: `Build: 2026-01-06`
+Make sure the form works, dark mode toggles, and there are no console errors.
 
 ---
 
 ## Deploy to GitHub Pages
 
-### Step 1: Copy files to Pages repo
+### Step 4: Commit your changes
 
 ```bash
-# From flashapp repo root
-cp -r landing-dist/* /path/to/your-pages-repo/
-
-# Or if using a specific subfolder in pages repo
-cp -r landing-dist/* /path/to/your-pages-repo/flash/
+git add .
+git commit -m "improve: Landing page updates [describe what changed]"
 ```
 
-### Step 2: Commit and push
+### Step 5: Push to GitHub
 
 ```bash
-cd /path/to/your-pages-repo
-
-git add .
-git commit -m "Deploy landing v2026-01-06 (from flashapp/landing-dist)"
 git push origin main
 ```
 
-### Step 3: Verify deployment
+### Step 6: Verify live deployment
 
-1. Wait 1-2 minutes for GitHub Pages to rebuild
-2. Open `https://dark-matter3.github.io/flash/` in incognito
-3. Hard refresh (Ctrl+Shift+R / Cmd+Shift+R)
-4. Verify build stamp in footer matches: `Build: 2026-01-06`
+1. **Wait 1-2 minutes** for GitHub Pages to rebuild
+2. **Open in incognito mode** to bypass browser cache:
+   ```bash
+   open https://dark-matter3.github.io/flash/
+   ```
+3. **Hard refresh** (Ctrl+Shift+R / Cmd+Shift+R)
+4. **Check browser console** (F12) for Logger output
+5. **Test dark mode toggle** works across all themes
+
+### Rollback (if needed)
+
+If you pushed a broken change:
+
+```bash
+# Revert the last commit
+git revert HEAD
+git push origin main
+
+# Wait 1-2 minutes for rebuild
+```
 
 ---
 

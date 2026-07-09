@@ -23,7 +23,7 @@ Do not rename, delete, or merge this repo until the public URL is verified to re
 
 ```
 Landing Page Source Code:
-  Local: /home/dark_matter3/linux-data/flash-pages
+  Local: /home/dark_matter3/linux-data/_deployment/flash-pages
   Remote: https://github.com/Dark-Matter3/flash.git (branch: main)
   Deploys to: https://dark-matter3.github.io/flash/
 
