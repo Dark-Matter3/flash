@@ -1,0 +1,172 @@
+# Flash Landing Page — Single Source of Truth
+
+**Canonical Location:** `/mnt/linux-data/Flash/flash-pages/` ✅  
+**Last Updated:** 2026-06-28  
+**Status:** Production-ready with Founder Infra Kit integration
+
+---
+
+## What This Is
+
+This is the **authoritative, live landing page** for Flash. All edits happen here. This is what gets deployed to production.
+
+---
+
+## Current Infrastructure (2026-06-28)
+
+✅ **Founder Infra Kit Modules Integrated:**
+- `js/logger.js` — Vanilla JS logging with tag-based categorization
+- `js/theme.js` — Dark/light mode toggle with localStorage persistence
+
+✅ **Pages:**
+- `index.html` — Main landing page (with theme toggle, Logger integration)
+- `privacy.html` — Privacy policy
+- `terms.html` — Terms of service
+
+✅ **Styling:**
+- `styles.css` — Complete design system with dark mode support (`.dark-mode` class)
+- `demo.css` — Demo widget styling
+
+✅ **Interactivity:**
+- `script.js` — Page interactions (smooth scroll, Firebase integration, Logger calls)
+- `demo.js` — Demo widget logic
+
+✅ **Assets:**
+- `assets/` — Images, mascot, branding
+
+---
+
+## Deployment Workflow
+
+### For GitHub Pages Live Site
+
+```bash
+# 1. Edit files in /mnt/linux-data/Flash/flash-pages/
+# (Make your changes here—this is the source of truth)
+
+# 2. Test locally
+cd /mnt/linux-data/Flash/flash-pages
+python3 -m http.server 8000
+
+# 3. Verify in browser
+# Open http://localhost:8000
+# Check: Logger console.log output, Theme toggle works, no errors
+
+# 4. Sync to deployment location (flash-app/landing-dist)
+cp -r /mnt/linux-data/Flash/flash-pages/* /mnt/linux-data/Flash/flash-app/landing-dist/
+
+# 5. Deploy from flash-app repo
+cd /mnt/linux-data/Flash/flash-app
+# Commit and push if using git for deployment
+git add landing-dist/
+git commit -m "Sync landing page from flash-pages canonical source (2026-06-28)"
+git push origin main
+
+# 6. Verify live site
+# Open https://dark-matter3.github.io/flash/ in incognito
+# Hard refresh (Cmd+Shift+R or Ctrl+Shift+R)
+# Confirm Logger messages in console, dark mode works
+```
+
+---
+
+## File Organization
+
+```
+/mnt/linux-data/Flash/flash-pages/
+├── SOURCE_OF_TRUTH.md          ← You are here (canonical definition)
+├── DEPLOY.md                    ← Deployment instructions
+├── index.html                   ← Main landing page
+├── privacy.html                 ← Privacy policy
+├── terms.html                   ← Terms of service
+├── styles.css                   ← Design tokens + dark mode
+├── demo.css                     ← Demo widget styles
+├── script.js                    ← Page interactions + Logger.info()
+├── demo.js                      ← Interactive demo logic
+├── assets/                      ← Mascot, icons, images
+└── js/
+    ├── logger.js                ← Vanilla JS Logger (no deps)
+    └── theme.js                 ← Theme Manager (localStorage + system preference)
+```
+
+---
+
+## Single Source of Truth Rules
+
+### ✅ DO:
+- Edit files **only** in `/mnt/linux-data/Flash/flash-pages/`
+- Test locally with `python3 -m http.server`
+- Verify Logger messages in browser console
+- Test dark mode toggle works
+- Sync changes to `flash-app/landing-dist/` before deploying
+- Update this file when adding new features
+
+### ❌ DON'T:
+- Edit `flash-app/landing-dist/` directly—it's a copy only
+- Maintain multiple versions of the same file
+- Deploy from flash-app without syncing from flash-pages first
+- Add features to landing-dist that aren't in flash-pages
+
+---
+
+## Verification Checklist (Before Deploying)
+
+- [ ] All changes made in `/mnt/linux-data/Flash/flash-pages/`
+- [ ] Tested locally: `python3 -m http.server 8000`
+- [ ] Browser console shows Logger output (no errors)
+- [ ] Dark mode toggle works: click button, see CSS class change
+- [ ] Mobile responsive: test at 375px width
+- [ ] Mascot loads and displays correctly
+- [ ] Demo widget interactive
+- [ ] All links work (smooth scroll to sections)
+- [ ] Build timestamp updated (if applicable)
+- [ ] Copied to `flash-app/landing-dist/` using `cp -r`
+- [ ] Committed and pushed to GitHub Pages repo
+- [ ] Live site verified at https://dark-matter3.github.io/flash/
+- [ ] Incognito mode + hard refresh (Cmd+Shift+R) shows new version
+
+---
+
+## Features
+
+### Dark Mode (2026-06-28)
+- Button in navbar: `<button id="theme-toggle">🌙 Dark</button>`
+- Persistence: localStorage key `flash-pages-theme-mode`
+- System preference detection: `window.matchMedia('(prefers-color-scheme: dark)')`
+- CSS variables update when `.dark-mode` class added to `<html>`
+
+### Logging (2026-06-28)
+- Global: `window.Logger` and `window.LoggerTags`
+- Auto-level: DEBUG on localhost, WARN in production
+- Page load: `Logger.info(LoggerTags.NAVIGATION, 'Flash landing page loaded')`
+- No external dependencies—pure vanilla JS
+
+---
+
+## Next Steps
+
+### Phase 1: Performance Logging (Future)
+- Log page load time, paint time, interaction latency
+- Send analytics to Firebase
+
+### Phase 2: A/B Testing (Future)
+- Variant support (minimal vs. full demo)
+- Event tracking for hero tap, demo interactions
+
+### Phase 3: Conversion Funnel (Future)
+- Track beta signup flow
+- Log user drop-off points
+
+---
+
+## Questions?
+
+Refer to:
+- [DEPLOY.md](DEPLOY.md) — Step-by-step deployment
+- [js/logger.js](js/logger.js) — Logger API
+- [js/theme.js](js/theme.js) — Theme Manager API
+- [styles.css](styles.css) — CSS variables and dark mode
+
+---
+
+**Status:** ✅ Production-Ready | **Last Sync:** 2026-06-28 | **Live Site:** https://dark-matter3.github.io/flash/

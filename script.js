@@ -36,6 +36,11 @@
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Log page load using Logger
+  if (typeof Logger !== 'undefined') {
+    Logger.info(LoggerTags.NAVIGATION, 'Flash landing page loaded');
+  }
+
   // ---------------------------------------------------------------
   // Smooth scrolling for navigation links
   // ---------------------------------------------------------------
