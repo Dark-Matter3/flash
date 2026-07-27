@@ -91,24 +91,24 @@ git push origin main
 ## Single Source of Truth Rules
 
 ### ✅ DO:
-- Edit files **only** in `/mnt/linux-data/Flash/flash-pages/`
-- Test locally with `python3 -m http.server`
+- Edit files **only** in `/home/dark_matter3/linux-data/_deployment/flash-pages/`
+- Test locally with `python3 -m http.server 8000`
 - Verify Logger messages in browser console
 - Test dark mode toggle works
-- Sync changes to `flash-app/landing-dist/` before deploying
+- Commit and push to main branch (auto-deploys to GitHub Pages)
 - Update this file when adding new features
 
 ### ❌ DON'T:
-- Edit `flash-app/landing-dist/` directly—it's a copy only
+- Edit this `flash/` repo directly—it's a deployment mirror only
 - Maintain multiple versions of the same file
-- Deploy from flash-app without syncing from flash-pages first
-- Add features to landing-dist that aren't in flash-pages
+- Deploy without testing locally first
+- Edit files in other locations expecting them to auto-sync
 
 ---
 
 ## Verification Checklist (Before Deploying)
 
-- [ ] All changes made in `/mnt/linux-data/Flash/flash-pages/`
+- [ ] All changes made in `/home/dark_matter3/linux-data/_deployment/flash-pages/`
 - [ ] Tested locally: `python3 -m http.server 8000`
 - [ ] Browser console shows Logger output (no errors)
 - [ ] Dark mode toggle works: click button, see CSS class change
@@ -116,10 +116,8 @@ git push origin main
 - [ ] Mascot loads and displays correctly
 - [ ] Demo widget interactive
 - [ ] All links work (smooth scroll to sections)
-- [ ] Build timestamp updated (if applicable)
-- [ ] Copied to `flash-app/landing-dist/` using `cp -r`
-- [ ] Committed and pushed to GitHub Pages repo
-- [ ] Live site verified at https://dark-matter3.github.io/flash/
+- [ ] Committed and pushed to main branch
+- [ ] Live site verified at https://dark-matter3.github.io/flash/ (wait 1-2 min)
 - [ ] Incognito mode + hard refresh (Cmd+Shift+R) shows new version
 
 ---
