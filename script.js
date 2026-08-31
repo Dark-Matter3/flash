@@ -163,7 +163,6 @@
     if (modal) {
       modal.addEventListener('click', function (e) {
         if (e.target === modal) closeModal();
-      try { console && console.debug && console.debug('openModal called'); } catch (e) {}
       });
     }
 

@@ -49,7 +49,6 @@ class ThemeManager {
     }
     
     localStorage.setItem(this.STORAGE_KEY, mode);
-    try { console.debug && console.debug('🎨 Theme changed:', { mode }); } catch (e) {}
     
     // Dispatch custom event for components to listen
     window.dispatchEvent(new CustomEvent('themechange', { detail: { mode } }));
