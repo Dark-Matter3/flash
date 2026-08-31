@@ -391,9 +391,9 @@ img { max-width: 100%; height: auto; }
    ======================== */
 .beta-proof {
     padding: var(--spacing-xl) 0;
-    background: rgba(167, 107, 255, 0.06);
-    border-top: 1px solid rgba(167, 107, 255, 0.15);
-    border-bottom: 1px solid rgba(167, 107, 255, 0.15);
+    background: var(--surface);
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
 }
 
 .proof-items {
@@ -411,9 +411,10 @@ img { max-width: 100%; height: auto; }
     font-weight: 500;
     color: var(--text-secondary);
     padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--surface-elevated);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(167, 107, 255, 0.15);
+    border: 1px solid var(--card-border);
+    transition: border-color 0.2s ease;
 }
 
 
@@ -422,7 +423,7 @@ img { max-width: 100%; height: auto; }
    ======================== */
 .why-flash {
     padding: var(--spacing-xxl) 0;
-    background: #111111;
+    background: var(--background);
 }
 
 .why-grid {
@@ -435,8 +436,7 @@ img { max-width: 100%; height: auto; }
     background: var(--surface);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid var(--card-border);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -465,9 +465,8 @@ img { max-width: 100%; height: auto; }
    HOW IT WORKS
    ======================== */
 .how-it-works {
-    background: #171717;
+    background: var(--surface);
     padding: var(--spacing-xxl) 0;
-    background: #171717;
 }
 
 /* Default: auto-fit single row. On desktop with 4 cards, force 2x2 */
@@ -527,7 +526,7 @@ img { max-width: 100%; height: auto; }
    ======================== */
 .status {
     padding: var(--spacing-xxl) 0;
-    background: #111111;
+    background: var(--background);
 }
 
 .status-grid {
@@ -537,10 +536,10 @@ img { max-width: 100%; height: auto; }
 }
 
 .status-item {
-    background: rgba(255, 255, 255, 0.045);
+    background: var(--surface);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--card-border);
     text-align: center;
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
@@ -847,9 +846,10 @@ img { max-width: 100%; height: auto; }
    FOOTER
    ======================== */
 footer {
-    background-color: #0a0a0a;
-    color: #fff;
+    background-color: var(--surface);
+    color: var(--text-primary);
     padding: var(--spacing-xl) 0 var(--spacing-lg);
+    border-top: 1px solid var(--card-border);
 }
 
 .footer-content {
@@ -884,9 +884,10 @@ footer {
 .footer-links a {
     color: var(--text-tertiary);
     font-size: 1.4rem;
+    transition: color 0.2s ease;
 }
 
-.footer-links a:hover { color: #fff; }
+.footer-links a:hover { color: var(--text-primary); }
 
 .footer-legal {
     display: flex;
@@ -897,9 +898,10 @@ footer {
 .footer-legal a {
     color: var(--text-tertiary);
     font-size: 1.3rem;
+    transition: color 0.2s ease;
 }
 
-.footer-legal a:hover { color: #fff; }
+.footer-legal a:hover { color: var(--text-primary); }
 
 .footer-bottom {
     text-align: center;
