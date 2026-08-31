@@ -30,9 +30,8 @@ class ThemeManager {
       }
     });
     
-    Logger.info(LoggerTags.UI, 'Theme manager initialized', { 
-      mode: this.getMode() 
-    });
+    // Theme manager initialized
+    try { console.debug && console.debug('🎨 Theme manager init:', { mode: this.getMode() }); } catch (e) {}
   }
 
   getMode() {
@@ -50,7 +49,7 @@ class ThemeManager {
     }
     
     localStorage.setItem(this.STORAGE_KEY, mode);
-    Logger.debug(LoggerTags.UI, 'Theme changed', { mode });
+    try { console.debug && console.debug('🎨 Theme changed:', { mode }); } catch (e) {}
     
     // Dispatch custom event for components to listen
     window.dispatchEvent(new CustomEvent('themechange', { detail: { mode } }));

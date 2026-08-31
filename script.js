@@ -37,14 +37,8 @@
 
  (function () {
   function init() {
-    // Log page load using Logger
-    if (typeof Logger !== 'undefined') {
-        if (typeof LoggerTags !== 'undefined') {
-          Logger.info(LoggerTags.NAVIGATION, 'Flash landing page loaded');
-        } else {
-          try { console && console.debug && console.debug('Logger or LoggerTags missing — continuing without Logger'); } catch (e) {}
-        }
-    }
+    // Init debug
+    try { console.debug && console.debug('🚀 Flash landing page init'); } catch (e) {}
 
     // ---------------------------------------------------------------
     // Smooth scrolling for navigation links
