@@ -39,7 +39,11 @@
   function init() {
     // Log page load using Logger
     if (typeof Logger !== 'undefined') {
-      Logger.info(LoggerTags.NAVIGATION, 'Flash landing page loaded');
+        if (typeof LoggerTags !== 'undefined') {
+          Logger.info(LoggerTags.NAVIGATION, 'Flash landing page loaded');
+        } else {
+          try { console && console.debug && console.debug('Logger or LoggerTags missing — continuing without Logger'); } catch (e) {}
+        }
     }
 
     // ---------------------------------------------------------------
@@ -151,7 +155,10 @@
     // Open triggers (hero + beta section buttons)
     ['hero-waitlist-btn', 'beta-waitlist-btn'].forEach(function (id) {
       var btn = document.getElementById(id);
-      if (btn) btn.addEventListener('click', openModal);
+        if (btn) {
+          btn.addEventListener('click', openModal);
+          try { console && console.debug && console.debug('Bound waitlist open to', id); } catch (e) {}
+        }
     });
 
     // Close via × button
@@ -162,6 +169,7 @@
     if (modal) {
       modal.addEventListener('click', function (e) {
         if (e.target === modal) closeModal();
+      try { console && console.debug && console.debug('openModal called'); } catch (e) {}
       });
     }
 
