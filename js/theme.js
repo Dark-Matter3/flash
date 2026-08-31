@@ -93,6 +93,12 @@ if (typeof module !== 'undefined' && module.exports) {
 window.Theme = theme;
 
 // Auto-setup if button exists
-document.addEventListener('DOMContentLoaded', () => {
+// Handle both cases: if DOMContentLoaded has already fired or will fire in future
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    theme.setupToggleButton('#theme-toggle');
+  });
+} else {
+  // DOMContentLoaded has already fired, setup immediately
   theme.setupToggleButton('#theme-toggle');
-});
+}

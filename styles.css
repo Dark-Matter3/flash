@@ -172,13 +172,20 @@ img { max-width: 100%; height: auto; }
 }
 
 /* Clean text logo — no mascot icon on navbar.
-   Mascot remains in app UI and screenshots. */
+   Mascot remains in app UI and screenshots.
+   Wordmark styling: prominent, recognizable, hierarchy-establishing. */
 .navbar .logo-text {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     color: var(--primary);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.navbar .logo-text:hover {
+    opacity: 0.9;
+    filter: brightness(1.1);
 }
 
 .navbar nav ul {
@@ -189,8 +196,8 @@ img { max-width: 100%; height: auto; }
 
 .navbar nav ul li a {
     color: var(--text-primary);
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 600;
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
     transition: background-color 0.2s ease;
@@ -206,17 +213,18 @@ img { max-width: 100%; height: auto; }
     background: none;
     border: none;
     color: var(--text-primary);
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 600;
     padding: var(--spacing-sm) var(--spacing-md);
     cursor: pointer;
     border-radius: var(--radius-sm);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
     font-family: inherit;
 }
 
 .theme-toggle-btn:hover {
     background-color: var(--surface);
+    opacity: 0.85;
 }
 
 /* ========================
