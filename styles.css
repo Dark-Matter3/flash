@@ -43,26 +43,11 @@
 }
 
 /* ========================
-   DARK MODE
+   DARK MODE (Class-based only)
    ======================== */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #121212;
-        --surface: #1E1E1E;
-        --surface-elevated: #2D2D2D;
-        --text-primary: #FFFFFF;
-        --text-secondary: #B3B3B3;
-        --text-tertiary: #808080;
-        --card-border: rgba(255, 255, 255, 0.1);
-        --card-shadow: rgba(0, 0, 0, 0.3);
-        --navbar-bg: rgba(18, 18, 18, 0.95);
-        --navbar-shadow: rgba(0, 0, 0, 0.3);
-        --primary: #BB86FC;
-        --primary-dark: #9965DF;
-    }
-}
-
-/* Override with explicit .dark-mode class */
+/* JS controls dark mode via .dark-mode class.
+   DO NOT add @media (prefers-color-scheme) here—it conflicts with JS control.
+   The JS already checks system preference on init. */
 html.dark-mode {
     --background: #121212;
     --surface: #1E1E1E;

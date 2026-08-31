@@ -142,40 +142,40 @@
   padding: 3rem 1rem;
 }
 
-/* Dark mode overrides for demo */
-@media (prefers-color-scheme: dark) {
-  .flash-demo {
-    --demo-primary: #BB86FC;
-    --demo-primary-dark: #9965DF;
-    --demo-bg: #121212;
-    --demo-card-bg: #1E1E1E;
-    --demo-text: #FFFFFF;
-    --demo-text-muted: #B3B3B3;
-    --demo-border: #3D3D3D;
-    --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  }
+/* Dark mode overrides for demo (class-based only) */
+/* JS controls dark mode via html.dark-mode class.
+   DO NOT use @media (prefers-color-scheme)—it conflicts with JS control. */
+html.dark-mode .flash-demo {
+  --demo-primary: #BB86FC;
+  --demo-primary-dark: #9965DF;
+  --demo-bg: #121212;
+  --demo-card-bg: #1E1E1E;
+  --demo-text: #FFFFFF;
+  --demo-text-muted: #B3B3B3;
+  --demo-border: #3D3D3D;
+  --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
 
-  .phone-screen {
-    background: #1E1E1E;
-  }
+html.dark-mode .phone-screen {
+  background: #1E1E1E;
+}
 
-  .phone-screen.flash-correct {
-    background-color: rgba(0, 200, 83, 0.25);
-  }
+html.dark-mode .phone-screen.flash-correct {
+  background-color: rgba(0, 200, 83, 0.25);
+}
 
-  .phone-screen.flash-wrong {
-    background-color: rgba(255, 82, 82, 0.25);
-  }
+html.dark-mode .phone-screen.flash-wrong {
+  background-color: rgba(255, 82, 82, 0.25);
+}
 
-  /* Card feedback overlay in dark mode */
-  .flash-demo__card-feedback {
-    background: rgba(30, 30, 30, 0.95);
-  }
+/* Card feedback overlay in dark mode */
+html.dark-mode .flash-demo__card-feedback {
+  background: rgba(30, 30, 30, 0.95);
+}
 
-  /* Type badge in dark mode */
-  .flash-demo__type {
-    background: rgba(187, 134, 252, 0.15);
-  }
+/* Type badge in dark mode */
+html.dark-mode .flash-demo__type {
+  background: rgba(187, 134, 252, 0.15);
 }
 
 .flash-demo .container {
