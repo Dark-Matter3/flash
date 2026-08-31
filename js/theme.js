@@ -73,7 +73,7 @@ class ThemeManager {
     button.addEventListener('click', () => {
       const newMode = this.toggle();
       button.textContent = newMode === 'dark' ? '☀️ Light' : '🌙 Dark';
-      Logger.info(LoggerTags.NAVIGATION, 'Theme toggled', { newMode });
+      try { console.debug && console.debug('🎨 Theme toggled:', newMode); } catch (e) {}
     });
 
     // Update button text on init
