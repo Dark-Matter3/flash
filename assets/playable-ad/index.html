@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flash - Vocabulary Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div id="start-screen" class="screen">
+            <div class="logo">FLASH</div>
+            <h1>Swipe to Learn</h1>
+            <p>Test your vocabulary skills!</p>
+            <button id="start-button">Start Game</button>
+        </div>
+        
+        <div id="game-screen" class="screen hidden">
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            
+            <div class="score-container">
+                <span id="score">0</span> points
+            </div>
+            
+            <div id="question-container">
+                <h2 id="question-text"></h2>
+                <p id="question-hint"></p>
+            </div>
+            
+            <div class="buttons-container">
+                <button id="left-button" class="answer-button">👈 False</button>
+                <button id="right-button" class="answer-button">True 👉</button>
+            </div>
+        </div>
+        
+        <div id="feedback-overlay" class="hidden">
+            <div id="feedback-message"></div>
+        </div>
+        
+        <div id="end-screen" class="screen hidden">
+            <h1>Great Job!</h1>
+            <p>You scored <span id="final-score">0</span> points</p>
+            <p class="teaser">Want to learn more vocabulary?</p>
+            <button id="install-button">Install Flash</button>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
