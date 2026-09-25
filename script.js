@@ -146,14 +146,7 @@
       }
     }
 
-    // Open triggers (hero + beta section buttons)
-    ['hero-waitlist-btn', 'beta-waitlist-btn'].forEach(function (id) {
-      var btn = document.getElementById(id);
-        if (btn) {
-          btn.addEventListener('click', openModal);
-          try { console && console.debug && console.debug('Bound waitlist open to', id); } catch (e) {}
-        }
-    });
+    // Removed: open triggers were removed from hero and beta sections (now direct Google Play links)
 
     // Close via × button
     var closeBtn = document.getElementById('modal-close-btn');

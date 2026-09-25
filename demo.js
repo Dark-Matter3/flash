@@ -597,7 +597,7 @@
         </p>
         <p class="flash-demo__complete-beta">
           🧪 This was just a taste!<br>
-          <a href="#contact">Join the closed beta</a> for 1000+ questions & full features.
+          <a href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener">Download Flash on Google Play</a> for 1000+ questions & full features.
         </p>
       </div>
     `;
