@@ -18,6 +18,9 @@ Thumbs.db
 .Spotlight-V100
 .Trash
 
+# Private ad build materials
+/ads/
+
 # Development & Testing
 node_modules/
 .cache/
