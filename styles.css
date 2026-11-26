@@ -340,6 +340,40 @@ img { max-width: 100%; height: auto; }
     color: var(--primary);
 }
 
+.install-counter:not([hidden]) {
+    display: grid;
+    justify-items: start;
+    gap: 0.25rem;
+    margin-block-start: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+}
+
+.install-counter__value {
+    color: var(--text-primary);
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.install-counter time {
+    color: var(--text-tertiary);
+    font-size: 1.3rem;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .beta .ios-waitlist-link {
     color: rgba(255, 255, 255, 0.82);
 }

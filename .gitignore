@@ -49,6 +49,7 @@ exports/
 tmp/
 working/
 PRIVATE_NOTES/
+/data/*.csv
 
 # Firebase service account (NEVER in a public repo)
 *service-account*.json

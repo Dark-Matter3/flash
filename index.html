@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Flash | Practice English and Spanish Vocabulary">
     <meta name="twitter:description" content="Practice English or Spanish vocabulary with Flash. Try the playable vocabulary demo, then keep practicing on Android.">
-    <link rel="stylesheet" href="styles.css?v=9a4297c">
+    <link rel="stylesheet" href="styles.css?v=play-installs-1">
     <link rel="stylesheet" href="demo.css?v=9a4297c">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +53,12 @@
                     <a class="btn btn-secondary btn-lg" href="#flash-demo">Try Demo</a>
                 </div>
                 <a href="#ios-waitlist" class="ios-waitlist-link" data-open-ios-waitlist>Request iPhone beta access</a>
+                <div class="install-counter" id="install-counter" hidden>
+                    <span class="install-counter__value" id="install-count" aria-hidden="true"></span>
+                    <span class="visually-hidden" id="install-count-accessible"></span>
+                    <span aria-hidden="true">Google Play user installs</span>
+                    <time id="install-report-date"></time>
+                </div>
                 <p class="hero-note">Android open beta · English and Spanish</p>
             </div>
             <div class="hero-visual">
@@ -218,7 +224,7 @@
     <script src="js/logger.js"></script>
     <script src="js/theme.js"></script>
     
-    <script src="script.js?v=9a4297c"></script>
+    <script src="script.js?v=play-installs-1"></script>
     <script defer src="demo.js?v=9a4297c"></script>
 </body>
 </html>

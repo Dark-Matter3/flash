@@ -1,0 +1,80 @@
+name: Refresh Play install snapshot
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: play-install-snapshot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Check Play Console configuration
+        id: configuration
+        shell: bash
+        env:
+          EXPORT_URI: ${{ vars.PLAY_CONSOLE_APP_WIDE_EXPORT_URI }}
+          SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_CONSOLE_GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$EXPORT_URI" || -z "$SERVICE_ACCOUNT_JSON" ]]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Refresh skipped. Configure PLAY_CONSOLE_APP_WIDE_EXPORT_URI and PLAY_CONSOLE_GCP_SERVICE_ACCOUNT_JSON after verifying the app-wide Play Console export."
+            exit 0
+          fi
+          if [[ "$EXPORT_URI" != gs://* || "$EXPORT_URI" == *"*"* ]]; then
+            echo "::error::PLAY_CONSOLE_APP_WIDE_EXPORT_URI must be one exact gs:// CSV object URI."
+            exit 1
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - uses: google-github-actions/auth@v2
+        if: steps.configuration.outputs.ready == 'true'
+        with:
+          credentials_json: ${{ secrets.PLAY_CONSOLE_GCP_SERVICE_ACCOUNT_JSON }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+        if: steps.configuration.outputs.ready == 'true'
+
+      - name: Download configured app-wide export
+        if: steps.configuration.outputs.ready == 'true'
+        shell: bash
+        env:
+          EXPORT_URI: ${{ vars.PLAY_CONSOLE_APP_WIDE_EXPORT_URI }}
+        run: |
+          set -euo pipefail
+          gcloud storage cp "$EXPORT_URI" "$RUNNER_TEMP/play-installs.csv"
+
+      - name: Validate and update public snapshot
+        if: steps.configuration.outputs.ready == 'true'
+        run: python3 scripts/update_play_installs.py "$RUNNER_TEMP/play-installs.csv"
+
+      - name: Publish changed snapshot
+        if: steps.configuration.outputs.ready == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add data/play-installs.json
+          if git diff --cached --quiet -- data/play-installs.json; then
+            echo "Play install snapshot is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update verified Play install snapshot"
+          git push origin main
+
+      - name: Remove raw report
+        if: always()
+        run: rm -f "$RUNNER_TEMP/play-installs.csv"

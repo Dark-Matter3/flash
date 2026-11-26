@@ -32,6 +32,71 @@
   }
 })();
 
+async function initInstallCounter() {
+  const counter = document.querySelector('#install-counter');
+  if (!counter) return;
+
+  const response = await fetch('./data/play-installs.json', { cache: 'no-cache' });
+  if (!response.ok) return;
+
+  const snapshot = await response.json();
+  const { count, reportDate } = snapshot;
+  if (!Number.isSafeInteger(count) || count < 0) return;
+  if (typeof reportDate !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(reportDate)) return;
+
+  const date = new Date(`${reportDate}T00:00:00Z`);
+  if (Number.isNaN(date.valueOf()) || date.toISOString().slice(0, 10) !== reportDate) return;
+
+  const numberFormat = new Intl.NumberFormat('en');
+  const dateFormat = new Intl.DateTimeFormat('en', {
+    dateStyle: 'medium',
+    timeZone: 'UTC',
+  });
+  const digits = counter.querySelector('#install-count');
+  const accessibleCount = counter.querySelector('#install-count-accessible');
+  const reportTime = counter.querySelector('#install-report-date');
+  const finalValue = numberFormat.format(count);
+
+  digits.textContent = '0';
+  accessibleCount.textContent = `${finalValue} Google Play user installs`;
+  reportTime.dateTime = reportDate;
+  reportTime.textContent = `As of ${dateFormat.format(date)}`;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+    digits.textContent = finalValue;
+    counter.hidden = false;
+    return;
+  }
+
+  counter.hidden = false;
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    observer.disconnect();
+    const start = performance.now();
+
+    function animate(now) {
+      const progress = Math.min((now - start) / 700, 1);
+      if (reducedMotion.matches || progress === 1) {
+        digits.textContent = finalValue;
+        return;
+      }
+
+      const eased = 1 - (1 - progress) ** 3;
+      digits.textContent = numberFormat.format(Math.floor(count * eased));
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  });
+
+  observer.observe(counter);
+}
+
+initInstallCounter().catch((error) => {
+  console.warn('Play install counter unavailable:', error);
+});
+
  (function () {
   function init() {
     // Init debug
