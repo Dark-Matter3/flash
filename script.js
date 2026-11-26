@@ -58,7 +58,7 @@ async function initInstallCounter() {
   const finalValue = numberFormat.format(count);
 
   digits.textContent = '0';
-  accessibleCount.textContent = `${finalValue} Google Play user installs`;
+  accessibleCount.textContent = `${finalValue} Google Play installs`;
   reportTime.dateTime = reportDate;
   reportTime.textContent = `As of ${dateFormat.format(date)}`;
 
