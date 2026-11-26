@@ -313,4 +313,4 @@ If any provision of these Terms is found invalid or unenforceable, the remaining
 
 For questions regarding these Terms:
 
-**Email:** cortexdigitaltech@gmail.com
+**Email:** innkeray@gmail.com

@@ -336,7 +336,7 @@ Certain information may remain where necessary because of:
 
 For questions regarding account or data deletion:
 
-**Email:** cortexdigitaltech@gmail.com
+**Email:** innkeray@gmail.com
 
 ## 18. User-Created Content
 
@@ -374,7 +374,7 @@ If we learn that personal information has been collected from a child in circums
 
 If you believe a child has provided personal information improperly, contact:
 
-**cortexdigitaltech@gmail.com**
+**innkeray@gmail.com**
 
 ## 21. International Processing
 
@@ -422,4 +422,4 @@ The effective date at the top of this Privacy Policy identifies the current vers
 
 For questions, privacy requests, or concerns regarding this Privacy Policy:
 
-**Email:** cortexdigitaltech@gmail.com
+**Email:** innkeray@gmail.com
