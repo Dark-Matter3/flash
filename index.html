@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CHANGED: Title and description updated — outcome-first, not mechanic-first -->
-    <title>Flash – Learn Vocabulary Faster</title>
-    <meta name="description" content="Flash is a mobile language-learning app that helps you acquire vocabulary and sentence patterns through short, adaptive, game-like practice. Available now on Google Play.">
+    <title>Flash | Practice English and Spanish Vocabulary</title>
+    <meta name="description" content="Practice English or Spanish vocabulary with Flash. Try the playable vocabulary demo, then keep practicing on Android.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Flash | Practice English and Spanish Vocabulary">
+    <meta property="og:description" content="Practice English or Spanish vocabulary with Flash. Try the playable vocabulary demo, then keep practicing on Android.">
+    <meta property="og:url" content="https://dark-matter3.github.io/flash/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Flash | Practice English and Spanish Vocabulary">
+    <meta name="twitter:description" content="Practice English or Spanish vocabulary with Flash. Try the playable vocabulary demo, then keep practicing on Android.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="demo.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- ============================================================
          NAV
-         CHANGED: Removed Download/Metrics links. Added Why Flash,
-         How It Works. Primary CTA is now Join Beta, not Download.
          ============================================================ -->
     <header class="navbar">
         <div class="container">
@@ -26,10 +30,9 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#why-flash">Why Flash</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#flash-demo">Demo</a></li>
-                    <li><a href="#beta" class="cta-button">Join Beta</a></li>
+                    <li><a href="#flash-demo">Try the demo</a></li>
+                    <li><a href="#what-next">Library</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener">Get Flash</a></li>
                     <li><button type="button" id="theme-toggle" class="theme-toggle-btn" title="Toggle dark mode">🌙 Dark</button></li>
                 </ul>
             </nav>
@@ -38,215 +41,58 @@
 
     <!-- ============================================================
          HERO
-         CHANGED: Headline is now outcome-first ("learn vocabulary
-         faster"), not mechanic-first ("swipe-based app").
-         Primary CTA = Join Beta. Secondary CTA = Try the in-page demo widget.
-         Removed app store badges — not publicly available yet.
-         Screenshot placeholder added with comment for future asset.
          ============================================================ -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>Build language skills through short, adaptive practice.</h1>
-                <p class="hero-tagline">Flash is a mobile language-learning app that helps you acquire vocabulary and sentence patterns through short, adaptive sessions — so you retain what you practice.</p>
-                <div class="hero-cta">
-                    <a href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Get Flash on Google Play</a>
-                    <a href="#flash-demo" class="btn btn-secondary">Try Demo</a>
+                <p class="hero-tagline">Flash is a mobile language-learning app that helps you acquire vocabulary and sentence patterns through short, adaptive sessions, so you retain what you practice.</p>
+                <div class="hero-cta" id="download">
+                    <span class="anchor-alias" id="beta" aria-hidden="true"></span>
+                    <a class="btn btn-primary btn-lg" href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener">Get Flash on Google Play</a>
+                    <a class="btn btn-secondary btn-lg" href="#flash-demo">Try Demo</a>
                 </div>
+                <a href="#ios-waitlist" class="ios-waitlist-link" data-open-ios-waitlist>Request iPhone beta access</a>
                 <p class="hero-note">Android open beta · English and Spanish</p>
             </div>
             <div class="hero-visual">
-                <!-- HomeScreen screenshot — real product visual inserted here -->
-                <!-- PATH NOTE: relative path, no leading slash — GitHub Pages /flash/ subpath safe -->
-                <img
-                    class="hero-screenshot"
-                    src="assets/Screenshot_20260422_172936.png"
-                    alt="Flash app home screen — level progress, XP stats, and Play button"
-                    width="260"
-                    loading="lazy"
-                >
+                <a class="hero-image-link" href="#flash-demo" aria-label="Try the Flash demo">
+                    <img
+                        class="hero-screenshot"
+                        src="assets/Screenshot_20260422_172936.png"
+                        alt="Flash home screen showing the practice mode selector, progress, and Play button"
+                        width="280"
+                        height="622"
+                        fetchpriority="high"
+                    >
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         BETA PROOF STRIP
-         Quick status indicators showing core product features
-         ============================================================ -->
-    <section class="beta-proof">
-        <div class="container">
-            <div class="proof-items">
-                <div class="proof-item">
-                    <span class="proof-text">Android beta</span>
-                </div>
-                <div class="proof-item">
-                    <span class="proof-text">English + Spanish</span>
-                </div>
-                <div class="proof-item">
-                    <span class="proof-text">Adaptive review</span>
-                </div>
-                <div class="proof-item">
-                    <span class="proof-text">Progress tracking</span>
-                </div>
+    <section class="library-showcase" id="what-next" aria-labelledby="library-showcase-title">
+        <div class="container library-showcase__grid">
+            <figure class="library-showcase__figure">
+                <img src="assets/flash-library.png" alt="Flash Library My Words screen with saved vocabulary and learning levels" width="1080" height="2400" loading="lazy">
+                <figcaption>Flash Library, My Words tab.</figcaption>
+            </figure>
+            <div class="library-showcase__copy">
+                <p class="library-showcase__eyebrow">IN THE APP</p>
+                <h2 id="library-showcase-title">Keep unlocked words within reach.</h2>
+                <p>Open My Words to find vocabulary again and return to it when you want another look.</p>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         WHY FLASH
-         NEW SECTION: Explains the problem with traditional vocab
-         study. Positions Flash on outcome, not gesture mechanic.
-         ============================================================ -->
-    <section class="why-flash" id="why-flash">
+    <section class="demo-section" id="demo-section" aria-labelledby="demo-section-title">
         <div class="container">
-            <h2>Why Flash</h2>
-            <p class="section-intro">Traditional study methods — word lists, flashcard apps, grammar drills — demand too much time and produce too little engagement. Most learners stop before real retention happens.</p>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-icon">⚡</div>
-                    <h3>Lower friction</h3>
-                    <p>Sessions are short and immediate. No setup, no long lessons to load. You practice in minutes, not hours.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">🔁</div>
-                    <h3>Built-in repetition</h3>
-                    <p>Adaptive review targets the words you need most. Progress does not rely on discipline alone — the system guides the loop.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">🎯</div>
-                    <h3>Outcome-focused</h3>
-                    <p>Flash is built around vocabulary acquisition and sentence pattern recognition — the two things that move real language ability forward.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         HOW IT WORKS
-         NEW SECTION: Explains the core loop in four steps.
-         Swipe is mentioned as one detail, not the main identity.
-         ============================================================ -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2>How It Works</h2>
-            <div class="steps steps--grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Start a session</h3>
-                    <p>Train in short, focused bursts.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Answer and build streak</h3>
-                    <p>Fast responses turn into momentum.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Review adapts to you</h3>
-                    <p>Hard words return. Mastered words fade.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Compete if you want</h3>
-                    <p>Leaderboards are optional, not required.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         CURRENT STATUS / PROOF
-         NEW SECTION: Replaces the fake metrics block (code coverage,
-         performance scores) with honest product status. No invented
-         numbers. Only real, confirmed facts about the current stage.
-         ============================================================ -->
-    <section class="status" id="status">
-        <div class="container">
-            <h2>Current Status</h2>
-            <div class="status-grid">
-                <div class="status-item">
-                    <div class="status-icon">📱</div>
-                    <h3>Android open beta</h3>
-                    <p>Available now on Google Play for all users.</p>
-                </div>
-                <div class="status-item">
-                    <div class="status-icon">🌍</div>
-                    <h3>Multilingual support</h3>
-                    <p>English and Spanish available. More languages planned.</p>
-                </div>
-                <div class="status-item">
-                    <div class="status-icon">🔧</div>
-                    <h3>Actively developed</h3>
-                    <p>Core learning, review, streak, and progress systems are live and improving.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         DEMO WIDGET
-         UNCHANGED: Interactive mini demo rendered by demo.js.
-         ============================================================ -->
-    <section class="demo-section" id="demo-section">
-        <section class="flash-demo" id="flash-demo" aria-labelledby="demo-title">
-            <!-- Content dynamically generated by demo.js -->
-            <noscript>
-                <div class="container" style="text-align: center; padding: 3rem;">
-                    <p>JavaScript is required to play the Flash Mini Demo.</p>
-                </div>
-            </noscript>
-        </section>
-    </section>
-
-    <!-- ============================================================
-         BETA CTA BLOCK
-         CHANGED: Copy now leads with value ("try it early, help
-         shape the product") instead of logistics ("device diversity,
-         invite batches"). Logistics moved to secondary microcopy.
-         ============================================================ -->
-    <section class="beta" id="beta">
-        <div class="container">
-            <div class="beta-content">
-                <span class="beta-badge">🚀 Available Now</span>
-                <h2>Download Flash</h2>
-                <p class="beta-description">
-                    Flash is live on Google Play. Download the app, select your language (English or Spanish), and start building vocabulary skills in short, adaptive sessions.
-                </p>
-                <div class="beta-details">
-                    <div class="beta-detail">
-                        <span class="beta-detail-icon">📱</span>
-                        <span>Android</span>
-                    </div>
-                    <div class="beta-detail">
-                        <span class="beta-detail-icon">🌍</span>
-                        <span>English + Spanish</span>
-                    </div>
-                    <div class="beta-detail">
-                        <span class="beta-detail-icon">⚡</span>
-                        <span>Free to play</span>
-                    </div>
-                </div>
-                <a href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Get Flash on Google Play</a>
-                <p class="beta-microcopy">
-                    Questions or feedback? Email us at <a href="mailto:innkeray@gmail.com">innkeray@gmail.com</a>.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         FOUNDER
-         CHANGED: Moved to bottom of page. One short paragraph.
-         Removed résumé language (availability, student schedule).
-         Framed as founder credibility, not personal profile.
-         ============================================================ -->
-    <section class="founder" id="founder">
-        <div class="container">
-            <div class="founder-content">
-                <h2>About</h2>
-                <p>Flash is built by <strong>Eray Korkmaz</strong>, a solo founder and developer. The app is now live on Google Play and actively used across multiple markets.</p>
-                <p>Questions or partnership interest: <a href="mailto:innkeray@gmail.com">innkeray@gmail.com</a></p>
-            </div>
+            <h2 class="demo-section__title" id="demo-section-title">Find the word that fits.</h2>
+            <section class="flash-demo" id="flash-demo" aria-label="Flash practice demo">
+                <!-- Content dynamically generated by demo.js -->
+                <noscript>
+                    <p>JavaScript is required to play the Flash demo.</p>
+                </noscript>
+            </section>
         </div>
     </section>
 
@@ -270,7 +116,7 @@
                         <li>Confirm the deletion when prompted</li>
                     </ol>
                     <p class="deletion-card__note">
-                        ⚠️ <strong>Note:</strong> Account deletion is permanent and cannot be undone.
+                        <strong>Note:</strong> Account deletion is permanent and cannot be undone.
                     </p>
                 </div>
                 <div class="deletion-card__section">
@@ -302,7 +148,7 @@
                         If you cannot access the app to delete your account, contact us at:
                     </p>
                     <a href="mailto:innkeray@gmail.com?subject=Flash%20Account%20Deletion%20Request" class="deletion-card__support-link">
-                        📧 innkeray@gmail.com
+                        innkeray@gmail.com
                     </a>
                     <p class="deletion-card__support-note">
                         Include the email associated with your account and mention "Account Deletion Request" in the subject line.
@@ -324,10 +170,10 @@
                     <span>Flash</span>
                 </div>
                 <div class="footer-links">
-                    <a href="#why-flash">Why Flash</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#flash-demo">Demo</a>
+                    <a href="#flash-demo">Try the demo</a>
+                    <a href="#what-next">Library</a>
                     <a href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener">Download</a>
+                    <a href="#ios-waitlist" data-open-ios-waitlist>iPhone beta access</a>
                 </div>
                 <div class="footer-legal">
                     <a href="privacy.html">Privacy Policy</a>
@@ -336,66 +182,32 @@
                 </div>
             </div>
             <div class="footer-bottom">
+                <p class="footer-founder">Built by <strong>Eray Korkmaz</strong>, an English teacher and independent developer, as part of Innkeray. <a href="mailto:innkeray@gmail.com">Contact</a>.</p>
                 <p>&copy; 2026 Flash. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- WAITLIST MODAL -->
-    <div id="waitlist-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="wl-modal-title" hidden>
+    <div id="ios-waitlist" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="ios-waitlist-title" aria-describedby="ios-waitlist-description" hidden>
         <div class="modal-dialog">
-            <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
-            <h2 id="wl-modal-title" class="modal-title">Flash on Google Play</h2>
-            <p class="modal-subtitle">Download Flash now on Google Play, or get product updates and partnership info.</p>
+            <button class="modal-close" id="ios-waitlist-close" type="button" aria-label="Close iPhone beta request form">&times;</button>
+            <h2 id="ios-waitlist-title" class="modal-title">Request iPhone beta access</h2>
+            <p id="ios-waitlist-description" class="modal-subtitle">We’ll email you a TestFlight invitation when a testing spot is available.</p>
 
-            <form id="waitlist-form" novalidate>
+            <form id="ios-waitlist-form" novalidate>
                 <div class="form-group">
-                    <label for="wl-email">Email address <span class="field-required">*</span></label>
-                    <input type="email" id="wl-email" name="email" placeholder="you@example.com" autocomplete="email" required>
-                    <span class="field-error" id="wl-email-error" aria-live="polite"></span>
+                    <label for="ios-waitlist-email">Email address</label>
+                    <input type="email" id="ios-waitlist-email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required>
+                    <span class="field-error" id="ios-waitlist-email-error" aria-live="polite"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="wl-name">Name <span class="field-optional">(optional)</span></label>
-                    <input type="text" id="wl-name" name="name" placeholder="Your name" autocomplete="name">
-                </div>
-
-                <div class="form-group">
-                    <label for="wl-role">Role <span class="field-optional">(optional)</span></label>
-                    <select id="wl-role" name="role">
-                        <option value="">Select a role&hellip;</option>
-                        <option value="learner">Learner</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="school">School / Institution</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="wl-interest">Interest <span class="field-optional">(optional)</span></label>
-                    <select id="wl-interest" name="interest">
-                        <option value="">Select an interest&hellip;</option>
-                        <option value="product_updates">Product updates</option>
-                        <option value="teacher_pilot">Teacher / classroom pilot</option>
-                        <option value="b2b_partnership">B2B partnership</option>
-                    </select>
-                </div>
-
-                <p class="consent-text">By submitting, you agree to receive updates about Flash. You can unsubscribe anytime.</p>
-
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-
-                <div class="form-success" id="wl-success" hidden>
-                    <p>&#10003;&nbsp; Thanks! We&rsquo;ll be in touch.</p>
-                </div>
-
-                <div class="form-submit-error" id="wl-submit-error" hidden></div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Request access</button>
+                <p class="form-success" id="ios-waitlist-success" role="status" aria-live="polite" hidden></p>
+                <p class="form-submit-error" id="ios-waitlist-submit-error" role="alert" aria-live="assertive" hidden></p>
             </form>
-
-            <p class="modal-fallback"><a href="https://play.google.com/store/apps/details?id=com.flashtech.flash" target="_blank" rel="noopener">↓ Download Flash on Google Play</a></p>
+            <p class="modal-privacy"><a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></p>
         </div>
     </div>
-    <!-- END WAITLIST MODAL -->
 
     <!-- Firebase Web SDK (compat) — public client config, no secrets -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>

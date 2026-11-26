@@ -1,7 +1,4 @@
-// Flash Landing Page – Interactive Elements
-// CHANGED: Removed newsletter form handler (section removed).
-// CHANGED: Updated scroll observer to target new card classes.
-// ADDED: Waitlist modal — open/close, validation, Firebase Firestore submit handler.
+// Flash landing page navigation and iOS waitlist modal.
 
 // Firebase Web SDK init — public client config, safe to commit.
 //
@@ -12,8 +9,8 @@
 // privileged access. Security is enforced at two layers:
 //   1. Google Cloud Console → API Keys → Browser key must be restricted
 //      to HTTP referrers: your domain(s) only (e.g. dark-matter3.github.io/flash/*)
-//   2. Firestore Security Rules — waitlistLeads only allows create with
-//      validated fields. All reads/updates/deletes are blocked.
+//   2. Firestore Security Rules allow validated creates in waitlistLeads only.
+//      All reads, updates, and deletes are blocked.
 // GitHub secret scanning alert: resolve as "used in client-side code" /
 // "false positive" after confirming the Browser key has HTTP referrer
 // restrictions applied in Google Cloud Console.
@@ -50,9 +47,15 @@
         const targetElement = document.querySelector(targetId);
 
         if (targetElement) {
+          const scrollTarget = targetId === '#flash-demo'
+            ? document.querySelector('#demo-section') || targetElement
+            : targetElement;
+          const navbarHeight = document.querySelector('.navbar')?.getBoundingClientRect().height || 0;
+          const targetTop = scrollTarget.getBoundingClientRect().top + window.scrollY;
+
           window.scrollTo({
-            top: targetElement.offsetTop - 70,
-            behavior: 'smooth',
+            top: Math.max(0, targetTop - navbarHeight - 12),
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
           });
         }
       });
@@ -70,104 +73,71 @@
     }
 
     // ---------------------------------------------------------------
-    // Fade-in on scroll for cards
+    // iPhone beta access requests
     // ---------------------------------------------------------------
-    const animatedItems = document.querySelectorAll(
-      '.why-card, .step, .status-item',
-    );
+    const modal = document.getElementById('ios-waitlist');
+    const form = document.getElementById('ios-waitlist-form');
+    const emailInput = document.getElementById('ios-waitlist-email');
+    const emailError = document.getElementById('ios-waitlist-email-error');
+    const successMsg = document.getElementById('ios-waitlist-success');
+    const submitError = document.getElementById('ios-waitlist-submit-error');
+    const submitButton = form?.querySelector('button[type="submit"]');
+    const closeButton = document.getElementById('ios-waitlist-close');
+    let activeTrigger = null;
+    let previousBodyOverflow = '';
 
-    if ('IntersectionObserver' in window && animatedItems.length) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.style.opacity = '1';
-              entry.target.style.transform = 'translateY(0)';
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1 },
-      );
-
-      animatedItems.forEach((item) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(16px)';
-        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-        observer.observe(item);
-      });
-    }
-
-    // ---------------------------------------------------------------
-    // WAITLIST MODAL
-    // ---------------------------------------------------------------
-    const modal = document.getElementById('waitlist-modal');
-    const form = document.getElementById('waitlist-form');
-    const emailInput = document.getElementById('wl-email');
-    const emailError = document.getElementById('wl-email-error');
-    const successMsg = document.getElementById('wl-success');
-
-    /**
-     * Open the waitlist modal.
-     * Analytics event: waitlist_modal_opened
-     */
-    function openModal() {
+    function openModal(trigger) {
       if (!modal) return;
+      activeTrigger = trigger;
+      previousBodyOverflow = document.body.style.overflow;
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
       if (emailInput) emailInput.focus();
-      logEvent('waitlist_modal_opened');
+      logEvent('ios_beta_request_modal_opened');
     }
 
-    /**
-     * Close the waitlist modal and reset form state.
-     */
     function closeModal() {
       if (!modal) return;
       modal.hidden = true;
-      document.body.style.overflow = '';
-      resetForm();
+      document.body.style.overflow = previousBodyOverflow;
+      if (activeTrigger) activeTrigger.focus();
     }
 
-    /**
-     * Reset the form to its initial state.
-     * Called on close and can be called after a successful submit if needed.
-     */
-    function resetForm() {
-      if (form) form.reset();
-      clearError();
-      hideSubmitError();
-      if (successMsg) successMsg.hidden = true;
-      var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
-      if (submitBtn) {
-        submitBtn.hidden = false;
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Join the waitlist';
-      }
-    }
+    document.querySelectorAll('[data-open-ios-waitlist]').forEach((trigger) => {
+      trigger.addEventListener('click', function (event) {
+        event.preventDefault();
+        openModal(this);
+      });
+    });
 
-    // Removed: open triggers were removed from hero and beta sections (now direct Google Play links)
+    if (closeButton) closeButton.addEventListener('click', closeModal);
 
-    // Close via × button
-    var closeBtn = document.getElementById('modal-close-btn');
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-    // Close when clicking backdrop
     if (modal) {
       modal.addEventListener('click', function (e) {
         if (e.target === modal) closeModal();
       });
+
+      modal.addEventListener('keydown', function (event) {
+        if (event.key !== 'Tab') return;
+        const focusable = [...modal.querySelectorAll('button:not([disabled]), input:not([disabled]), a[href]')];
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
     }
 
-    // Close on Escape key
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal && !modal.hidden) closeModal();
     });
 
-    // ---------------------------------------------------------------
-    // Form validation helpers
-    // ---------------------------------------------------------------
-    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function setError(msg) {
       if (!emailError || !emailInput) return;
@@ -183,128 +153,77 @@
       emailInput.removeAttribute('aria-invalid');
     }
 
-    if (emailInput) {
-      emailInput.addEventListener('input', function () {
-        if (emailInput.value.trim()) clearError();
-      });
-    }
-
-    // ---------------------------------------------------------------
-    // Form submit
-    // ---------------------------------------------------------------
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        clearError();
-
-        var email = emailInput ? emailInput.value.trim() : '';
-        var name = (document.getElementById('wl-name') || {}).value || '';
-        var role = (document.getElementById('wl-role') || {}).value || '';
-        var interest = (document.getElementById('wl-interest') || {}).value || '';
-
-        // Validation
-        if (!email) {
-          setError('Email address is required.');
-          if (emailInput) emailInput.focus();
-          return;
-        }
-        if (!EMAIL_RE.test(email)) {
-          setError('Please enter a valid email address.');
-          if (emailInput) emailInput.focus();
-          return;
-        }
-
-        var lead = {
-          email: email,
-          name: name || null,
-          role: role || null,
-          interest: interest || null,
-          source: 'landing_page_modal',
-          createdAt: new Date().toISOString(),
-        };
-
-        submitLead(lead);
-      });
-    }
-
-    var submitError = document.getElementById('wl-submit-error');
-
-    function showSubmitError(msg) {
+    function setSubmitError(message) {
       if (!submitError) return;
-      submitError.textContent = msg;
-      submitError.hidden = false;
+      submitError.textContent = message;
+      submitError.hidden = !message;
     }
 
-    function hideSubmitError() {
-      if (!submitError) return;
-      submitError.textContent = '';
-      submitError.hidden = true;
-    }
-
-    /**
-     * Save lead to Firestore collection 'waitlistLeads'.
-     * Falls back to local success state if Firebase SDK is not loaded.
-     */
-    function submitLead(lead) {
-      var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
-      hideSubmitError();
-
-      // Loading state
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitting\u2026';
-      }
-
-      var hasFirestore = typeof firebase !== 'undefined' && firebase.firestore;
-
-      if (hasFirestore) {
-        var db = firebase.firestore();
-        db.collection('waitlistLeads')
-          .add({
-            email: lead.email,
-            name: lead.name || null,
-            role: lead.role || null,
-            interest: lead.interest || null,
-            source: 'landing_page_modal',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          })
-          .then(function () {
-            logEvent('waitlist_lead_submitted', { role: lead.role, interest: lead.interest });
-            if (submitBtn) {
-              submitBtn.textContent = 'Join the waitlist'; // reset text before hiding
-              submitBtn.hidden = true;
-            }
-            if (successMsg) successMsg.hidden = false;
-          })
-          .catch(function () {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Join the waitlist';
-            }
-            showSubmitError(
-              'Something went wrong. Please try again or use the Google Forms link below.',
-            );
-          });
-      } else {
-        // Firebase not available — show success locally
-        logEvent('waitlist_lead_submitted', { role: lead.role, interest: lead.interest });
-        if (submitBtn) submitBtn.hidden = true;
-        if (successMsg) successMsg.hidden = false;
-      }
-    }
-
-    /**
-     * Log an analytics event via Firebase Analytics.
-     * Falls back silently if the SDK is not loaded.
-     */
     function logEvent(eventName, params) {
       try {
         if (typeof firebase !== 'undefined' && firebase.analytics) {
           firebase.analytics().logEvent(eventName, params || {});
         }
-      } catch (e) {
-        // Analytics failures are non-fatal — never block the user flow
+      } catch (error) {
+        // Analytics failures do not block the waitlist flow.
       }
+    }
+
+    if (emailInput) {
+      emailInput.addEventListener('input', function () {
+        if (emailInput.value.trim()) clearError();
+        if (successMsg) successMsg.hidden = true;
+        setSubmitError('');
+      });
+    }
+
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        clearError();
+        setSubmitError('');
+        if (successMsg) successMsg.hidden = true;
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        if (!email || !EMAIL_RE.test(email) || email.length > 255) {
+          setError('Enter a valid email address.');
+          emailInput?.focus();
+          return;
+        }
+
+        if (typeof firebase === 'undefined' || !firebase.firestore) {
+          setSubmitError('iPhone beta requests are temporarily unavailable. Please try again later.');
+          return;
+        }
+
+        const originalButtonText = submitButton ? submitButton.textContent : 'Request access';
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Submitting…';
+        }
+
+        try {
+          const db = firebase.firestore();
+          await db.collection('waitlistLeads').add({
+            email,
+            name: null,
+            role: null,
+            interest: 'closed_beta',
+            source: 'landing_page_modal',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+          logEvent('ios_beta_request_submitted', { interest: 'closed_beta' });
+          successMsg.textContent = 'Beta access requested.';
+          successMsg.hidden = false;
+        } catch (error) {
+          setSubmitError('We couldn’t add that address right now. Please try again.');
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+          }
+        }
+      });
     }
   }
 

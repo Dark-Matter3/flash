@@ -168,6 +168,7 @@
   // DOM REFERENCES
   // ==========================================
   let elements = {};
+  let advanceTimeout = null;
 
   // ==========================================
   // INITIALIZATION
@@ -247,6 +248,7 @@
                   <span class="flash-demo__card-feedback-icon" id="demo-feedback-icon">✅</span>
                   <span class="flash-demo__card-feedback-text" id="demo-feedback-text">Correct!</span>
                 </div>
+                <div class="flash-demo__complete" id="demo-complete" hidden></div>
               </div>
 
               <!-- Swipe Indicators -->
@@ -266,8 +268,8 @@
 
       <!-- Restart Button - OUTSIDE phone frame -->
       <div class="flash-demo__controls-outside">
-        <button class="flash-demo__btn" id="demo-restart" type="button">
-          Restart Demo
+        <button class="flash-demo__btn" id="demo-restart" type="button" hidden>
+          Restart
         </button>
       </div>
     `;
@@ -282,6 +284,8 @@
       cardFeedback: document.getElementById('demo-card-feedback'),
       feedbackIcon: document.getElementById('demo-feedback-icon'),
       feedbackText: document.getElementById('demo-feedback-text'),
+      choices: document.querySelector('.flash-demo__choices'),
+      complete: document.getElementById('demo-complete'),
       choiceLeft: document.getElementById('choice-left'),
       choiceRight: document.getElementById('choice-right'),
       choiceLeftText: document.getElementById('choice-left-text'),
@@ -400,6 +404,14 @@
   // GAME LOGIC
   // ==========================================
   function resetGame() {
+    if (advanceTimeout !== null) {
+      clearTimeout(advanceTimeout);
+      advanceTimeout = null;
+    }
+    swipe.isDragging = false;
+    elements.restartBtn.hidden = true;
+    elements.restartBtn.textContent = 'Restart';
+
     state = {
       currentIndex: 0,
       score: 0,
@@ -434,9 +446,15 @@
     elements.card.className = 'flash-demo__card';
     elements.card.style.transform = '';
     elements.card.style.transition = '';
+    elements.card.style.opacity = '1';
+    elements.type.hidden = false;
+    elements.prompt.hidden = false;
+    elements.choices.hidden = false;
+    elements.complete.hidden = true;
     elements.cardFeedback.classList.remove(
       'flash-demo__card-feedback--visible'
     );
+    elements.cardFeedback.setAttribute('aria-hidden', 'true');
 
     // Update content
     elements.type.textContent = question.type;
@@ -453,6 +471,7 @@
       'flash-demo__choice flash-demo__choice--right';
 
     state.answered = false;
+    updateStats();
 
     // Animate card in
     elements.card.classList.add('flash-demo__card--enter');
@@ -471,6 +490,7 @@
     if (state.answered) return;
 
     state.answered = true;
+    elements.restartBtn.hidden = false;
 
     const question = getCurrentQuestion();
     const isCorrect = side === question.correctSide;
@@ -542,7 +562,8 @@
     announce(isCorrect ? 'Correct!' : `Incorrect. ${question.explanation}`);
 
     // Auto-advance after delay
-    setTimeout(() => {
+    advanceTimeout = setTimeout(() => {
+      advanceTimeout = null;
       state.currentIndex++;
       elements.card.style.opacity = '1';
       renderQuestion();
@@ -559,23 +580,35 @@
         ? 'flash-demo__card-feedback--correct'
         : 'flash-demo__card-feedback--wrong'
     );
+    elements.cardFeedback.setAttribute('aria-hidden', 'false');
   }
 
   function renderComplete() {
-    const percentage = Math.round((state.score / QUESTIONS.length) * 100);
+    const totalQuestions = getTotalQuestions();
+    const percentage = Math.round((state.score / totalQuestions) * 100);
     const emoji = percentage >= 80 ? '🎉' : percentage >= 50 ? '👍' : '💪';
 
+    elements.restartBtn.hidden = false;
+    elements.restartBtn.textContent = 'Play again';
     elements.card.className = 'flash-demo__card flash-demo__card--complete';
     elements.card.style.transform = '';
     elements.card.style.opacity = '1';
-    elements.card.innerHTML = `
+    elements.type.hidden = true;
+    elements.prompt.hidden = true;
+    elements.choices.hidden = true;
+    elements.cardFeedback.classList.remove(
+      'flash-demo__card-feedback--visible'
+    );
+    elements.cardFeedback.setAttribute('aria-hidden', 'true');
+    elements.complete.hidden = false;
+    elements.complete.innerHTML = `
       <div class="flash-demo__complete">
         <div class="flash-demo__complete-emoji">${emoji}</div>
         <h3 class="flash-demo__complete-title">Demo Complete!</h3>
         <div class="flash-demo__complete-stats">
           <div class="flash-demo__complete-stat">
             <span class="flash-demo__complete-stat-value">${state.score}/${
-      QUESTIONS.length
+          totalQuestions
     }</span>
             <span class="flash-demo__complete-stat-label">Score</span>
           </div>
@@ -602,24 +635,23 @@
       </div>
     `;
 
-    // Hide choice buttons
-    elements.choiceLeft.style.visibility = 'hidden';
-    elements.choiceRight.style.visibility = 'hidden';
+    updateStats();
 
     announce(
-      `Demo complete. You scored ${state.score} out of ${QUESTIONS.length}. Best streak: ${state.highStreak}.`
+      `Demo complete. You scored ${state.score} out of ${totalQuestions}. Best streak: ${state.highStreak}.`
     );
   }
 
   function updateStats() {
+    const totalQuestions = getTotalQuestions();
     elements.score.textContent = state.score;
     elements.streak.textContent = state.streak;
     elements.progress.textContent = `${Math.min(
       state.currentIndex + 1,
-      QUESTIONS.length
-    )}/${QUESTIONS.length}`;
+      totalQuestions
+    )}/${totalQuestions}`;
 
-    const progressPercent = (state.currentIndex / QUESTIONS.length) * 100;
+    const progressPercent = (state.currentIndex / totalQuestions) * 100;
     elements.progressFill.style.width = `${progressPercent}%`;
 
     // Streak emphasis animation
@@ -631,10 +663,6 @@
   }
 
   function handleRestart() {
-    // Reset visibility of choice buttons
-    elements.choiceLeft.style.visibility = '';
-    elements.choiceRight.style.visibility = '';
-
     resetGame();
     announce('Demo restarted.');
   }

@@ -125,18 +125,18 @@
    CONTAINER & HEADER
    ========================================== */
 .flash-demo {
-  --demo-primary: #6200EE;
-  --demo-primary-dark: #3700B3;
-  --demo-secondary: #03DAC6;
-  --demo-success: #00C853;
-  --demo-error: #FF5252;
-  --demo-bg: #ffffff;
-  --demo-card-bg: #ffffff;
-  --demo-text: #212121;
-  --demo-text-muted: #757575;
-  --demo-border: #e0e0e0;
-  --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  --demo-radius: 16px;
+  --demo-primary: #E27500;
+  --demo-primary-dark: #A85200;
+  --demo-secondary: #22C7B8;
+  --demo-success: #168038;
+  --demo-error: #B3261E;
+  --demo-bg: transparent;
+  --demo-card-bg: #FFFFFF;
+  --demo-text: #1A1A1A;
+  --demo-text-muted: #555555;
+  --demo-border: #E1E1E1;
+  --demo-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --demo-radius: 8px;
 
   background: var(--demo-bg);
   padding: 3rem 1rem;
@@ -146,18 +146,21 @@
 /* JS controls dark mode via html.dark-mode class.
    DO NOT use @media (prefers-color-scheme)—it conflicts with JS control. */
 html.dark-mode .flash-demo {
-  --demo-primary: #BB86FC;
-  --demo-primary-dark: #9965DF;
-  --demo-bg: #121212;
-  --demo-card-bg: #1E1E1E;
-  --demo-text: #FFFFFF;
-  --demo-text-muted: #B3B3B3;
-  --demo-border: #3D3D3D;
-  --demo-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --demo-primary: #F59A3B;
+  --demo-primary-dark: #E27500;
+  --demo-secondary: #4DD9CC;
+  --demo-success: #4FD191;
+  --demo-error: #FF7979;
+  --demo-bg: transparent;
+  --demo-card-bg: #1A1A1A;
+  --demo-text: #F8F8F8;
+  --demo-text-muted: #A6A6A6;
+  --demo-border: #404040;
+  --demo-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
 }
 
 html.dark-mode .phone-screen {
-  background: #1E1E1E;
+  background: #1A1A1A;
 }
 
 html.dark-mode .phone-screen.flash-correct {
@@ -175,7 +178,7 @@ html.dark-mode .flash-demo__card-feedback {
 
 /* Type badge in dark mode */
 html.dark-mode .flash-demo__type {
-  background: rgba(187, 134, 252, 0.15);
+  background: color-mix(in srgb, var(--demo-primary) 15%, transparent);
 }
 
 .flash-demo .container {
@@ -208,9 +211,9 @@ html.dark-mode .flash-demo__type {
   padding: 0.5rem 1rem;
   font-size: clamp(14px, 0.3vw + 13px, 15px);
   color: var(--demo-primary-dark);
-  background: rgba(98, 0, 238, 0.08);
+  background: color-mix(in srgb, var(--demo-primary) 8%, transparent);
   border-radius: 999px;
-  border: 1px solid rgba(98, 0, 238, 0.2);
+  border: 1px solid color-mix(in srgb, var(--demo-primary) 20%, transparent);
 }
 
 .flash-demo__beta-notice a {
@@ -386,7 +389,7 @@ html.dark-mode .flash-demo__type {
   font-size: clamp(13px, 0.3vw + 12px, 14px);
   font-weight: 600;
   color: var(--demo-primary);
-  background: rgba(98, 0, 238, 0.1);
+  background: color-mix(in srgb, var(--demo-primary) 10%, transparent);
   padding: 0.3rem 0.85rem;
   border-radius: 999px;
   /* margin-bottom removed — card gap handles spacing */
@@ -594,7 +597,7 @@ html.dark-mode .flash-demo__type {
 
 .flash-demo__choice:hover:not(:disabled) {
   border-color: var(--demo-primary);
-  background: rgba(98, 0, 238, 0.05);
+  background: color-mix(in srgb, var(--demo-primary) 5%, transparent);
 }
 
 .flash-demo__choice:active:not(:disabled) {
@@ -676,11 +679,11 @@ html.dark-mode .flash-demo__type {
 
 .flash-demo__controls-outside .flash-demo__btn:hover {
   border-color: rgba(0, 0, 0, 0.22);
-  background: rgba(98, 0, 238, 0.04);
+  background: color-mix(in srgb, var(--demo-primary) 4%, transparent);
 }
 
 .flash-demo__controls-outside .flash-demo__btn:focus-visible {
-  outline: 3px solid rgba(98, 0, 238, 0.28);
+  outline: 3px solid color-mix(in srgb, var(--demo-primary) 28%, transparent);
   outline-offset: 2px;
 }
 
@@ -792,9 +795,9 @@ html.dark-mode .flash-demo__type {
   line-height: 1.5;
   margin: 0;
   padding: 0.75rem 1rem;
-  background: rgba(98, 0, 238, 0.08);
+  background: rgba(226, 117, 0, 0.08);
   border-radius: 12px;
-  border: 1px solid rgba(98, 0, 238, 0.15);
+  border: 1px solid rgba(226, 117, 0, 0.15);
 }
 
 .flash-demo__complete-beta a {
@@ -854,4 +857,52 @@ html.dark-mode .flash-demo__type {
 .flash-demo__btn:focus-visible {
   outline: 3px solid var(--demo-secondary);
   outline-offset: 2px;
+}
+
+.demo-section .phone-frame {
+  width: 36rem;
+  max-width: 100%;
+}
+
+.demo-section .flash-demo__prompt {
+  font-size: clamp(20px, 1.5vw + 14px, 22px);
+  line-height: 1.4;
+}
+
+.demo-section .flash-demo__choice {
+  min-height: 6.4rem;
+  font-size: clamp(16px, 1vw + 13px, 18px);
+}
+
+.demo-section .flash-demo__controls-outside .flash-demo__btn {
+  min-height: 4.4rem;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 440px) {
+  .demo-section .phone-frame {
+    width: min(100%, 36rem);
+    max-width: 36rem;
+    padding: 1rem;
+    border-radius: 4.4rem;
+    background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  }
+
+  .demo-section .phone-notch {
+    display: block;
+  }
+
+  .demo-section .phone-screen {
+    min-height: 60.2rem;
+    padding: 2rem 0.75rem 1.25rem;
+    border-radius: 3.4rem;
+  }
+
+  html.dark-mode .demo-section .phone-screen {
+    background: #1A1A1A;
+  }
 }
