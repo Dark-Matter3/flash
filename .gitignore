@@ -26,6 +26,8 @@ node_modules/
 .cache/
 dist/
 build/
+__pycache__/
+*.py[cod]
 
 # Backup & Temporary
 *.backup
